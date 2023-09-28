@@ -2,12 +2,19 @@ const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 // validator: dashboard displays one day only/ defaults to current day
-  async function todayOnly(req, res, next){
-  // let currentDate = new Date();
-  // if(currentDate === req.)
-  // res.json({data: await service.list})
+  async function todaysReservations(req, res, next){
+  // get current date
+  let currentDate = new Date();
+  let status = res.json({
+    data: await service.listTodayReservations(currentDate),
+  });
 }
 
+
+async function createReservation(req, res){
+    const data = await service.create(req.body.data);
+    res.status(201).json({data});
+}
 
 // async function reservationExists to weed out any invalid reservations
 async function reservationExists(req, res, next){
@@ -31,7 +38,8 @@ async function list(req, res) {
 }
 
 module.exports = {
-  list: asyncErrorBoundary(list),
+  list: asyncErrorBoundary(todaysReservations),
+  create: asyncErrorBoundary(createReservation),
 };
 
 

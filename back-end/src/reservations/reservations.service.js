@@ -1,5 +1,5 @@
 const knex = require("../db/connection");
-const reservationTable= "reservations";
+const reservationTable = "reservations";
 
 function list() {
     return knex(reservationTable)
@@ -9,15 +9,17 @@ function list() {
 function listTodayReservations(date) {
     return knex("reservations")
         .select("*")
-        .where({ reservation_date: date })
+        .where({ reservation_date : date })
         .orderBy("reservation_time", "asc");
     }    
+// console.log(listTodayReservations(date))
 
 function create(newReservation){
     return knex(reservationTable)
         .insert(newReservation)
-        .then((data) => data[0]);
+        .then((data) => console.log(data[0]));
 }
+
 
 function destroy(reservation_id){
     return knex(reservationTable).where({reservation_id}).del();
