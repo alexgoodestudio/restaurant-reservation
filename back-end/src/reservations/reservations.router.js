@@ -7,4 +7,8 @@ router.route("/")
     .get(controller.list)
     .all(methodNotAllowed)
 
+    router.route("/:new")
+    .get(controller.list)
+    .all(methodNotAllowed)
+
 module.exports = router;

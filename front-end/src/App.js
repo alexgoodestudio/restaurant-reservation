@@ -4,6 +4,7 @@ import Layout from "./layout/Layout";
 
 /**
  * Defines the root application component.
+ * You will not need to make changes to this file.
  * @returns {JSX.Element}
  */
 function App() {
