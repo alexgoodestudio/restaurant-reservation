@@ -8,10 +8,12 @@ exports.up = function (knex) {
     table.time("reservation_time").notNullable();
     table.integer("people").unsigned().notNullable();
     table.timestamps(true, true);
+    table.string("status").defaultTo("booked");  // Uncommented
+    // table.integer("table_id").unsigned();  // Define the column type (if needed)
+    // table.foreign("table_id").references("table_id").inTable("tables");  // Set as foreign key (if needed)
   });
 };
 
 exports.down = function (knex) {
   return knex.schema.dropTable("reservations");
 };
-

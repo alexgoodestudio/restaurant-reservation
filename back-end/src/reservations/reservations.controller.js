@@ -1,45 +1,80 @@
 const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
+const notFound = require("../errors/notFound")
 
+const requiredProperties = [
+  "first_name",
+  "last_name",
+  "mobile_number",
+  "reservation_date",
+  "reservation_time",
+  "people",
+];
 // validator: dashboard displays one day only/ defaults to current day
-  async function todaysReservations(req, res, next){
+async function list(req, res, next){
   // get current date
   let currentDate = new Date();
   let status = res.json({
     data: await service.listTodayReservations(currentDate),
   });
+  return status;
 }
 
 
-async function createReservation(req, res){
-    const data = await service.create(req.body.data);
-    res.status(201).json({data});
-}
+function hasRequiredProperties(req, res, next) {
+  const { data = {} } = req.body;
+  const missingProperties = [];
+  const invalidProperties = [];
 
-// async function reservationExists to weed out any invalid reservations
-async function reservationExists(req, res, next){
-
-}
-
-// async function to display single Reservation for search page
-async function findReservation(req, res, next){
-
-}
-
-//async function for the updating that uses update function from service
-async function update(req, res, next){
-
-}
-
-async function list(req, res) {
-  res.json({
-    data: await service.list(),
+  requiredProperties.forEach((property) => {
+    if (!data[property]) {
+      missingProperties.push(`'${property}'`);
+    }
   });
+
+  // Additional validation for specific data types
+  if (isNaN(Date.parse(data.reservation_date))) {
+    invalidProperties.push("'reservation_date' must be a valid date");
+  }
+  if (!/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(data.reservation_time)) {
+    invalidProperties.push("'reservation_time' must be a valid time");
+  }
+  if (isNaN(data.people) || typeof data.people !== 'number') {
+    invalidProperties.push("'people' must be a valid number");
+  }
+
+  if (missingProperties.length || invalidProperties.length) {
+    return next({
+      status: 400,
+      message: [
+        ...missingProperties.length ? [`Missing properties: ${missingProperties.join(", ")}`] : [],
+        ...invalidProperties,
+      ].join("; "),
+    });
+  }
+  next();
 }
+
+
+async function create(req, res){
+  console.log("Request body:", req.body);  // Debugging line
+  const data = await service.create(req.body);
+  console.log("Returned data:", data);  // Debugging line
+  res.status(201).json({data});
+}
+
+
+
+async function destroy(req,res){
+  const { reservationId } = req.params;
+  await service.destroy(reservationId )
+  res.sendStatus(204);
+} 
 
 module.exports = {
-  list: asyncErrorBoundary(todaysReservations),
-  create: asyncErrorBoundary(createReservation),
+  list:  asyncErrorBoundary(list),
+  create: [asyncErrorBoundary(hasRequiredProperties), asyncErrorBoundary(create)],
+  delete: asyncErrorBoundary(destroy)
 };
 
 
