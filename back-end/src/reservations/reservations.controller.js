@@ -13,15 +13,20 @@ const requiredProperties = [
 // validator: dashboard displays one day only/ defaults to current day
 async function list(req, res, next){
   // get current date
-  let currentDate = new Date();
-  let status = res.json({
-    data: await service.listTodayReservations(currentDate),
+  // let currentDate = new Date();
+
+  const {date} = req.query;
+  console.log("lineeeeeee",date)
+  const test  = req.params
+  console.log(test, "test")
+   res.json({
+    data: await service.listTodayReservations(date),
   });
-  return status;
 }
 
 
 function hasRequiredProperties(req, res, next) {
+  console.log("hasRequiredPropertiess")
   const { data = {} } = req.body;
   const missingProperties = [];
   const invalidProperties = [];
@@ -57,9 +62,9 @@ function hasRequiredProperties(req, res, next) {
 
 
 async function create(req, res){
-  console.log("Request body:", req.body);  // Debugging line
-  const data = await service.create(req.body);
-  console.log("Returned data:", data);  // Debugging line
+  console.log("Request body:", req.body);  
+  const data = await service.create(req.body.data);
+  console.log("Returned data:", data);  
   res.status(201).json({data});
 }
 

@@ -14,6 +14,8 @@ function listTodayReservations(date) {
 
 
 async function create(newReservation) {
+    console.log("serviceCreate")
+    console.log(newReservation,"***********")
     return knex("reservations")
         .insert(newReservation)
         .returning("*")
