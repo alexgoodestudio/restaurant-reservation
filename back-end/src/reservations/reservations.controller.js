@@ -1,6 +1,6 @@
 const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
-const notFound = require("../errors/notFound")
+const hasProperties = require("../errors/hasProperties");
 
 const requiredProperties = [
   "first_name",
@@ -10,76 +10,47 @@ const requiredProperties = [
   "reservation_time",
   "people",
 ];
-// validator: dashboard displays one day only/ defaults to current day
-async function list(req, res, next){
-  // get current date
-  // let currentDate = new Date();
 
+//async function for the updating that uses update function from service
+
+function validDate(data, res) {
+  const reservationDate = new Date(data.reservation_date);
+  if (reservationDate.getDay() === 2) {
+    res.status(400).send("Reservations are not allowed on Tuesdays");
+  }
+}
+
+async function update(req,res,next){
+  const {reservation_id} = req.params;
+  const data = await service.read(reservation_id);
+  const {status} = req.body.data;
+  const updatedData = {...data,status:status};
+  res.status(200).json({data:updatedData})
+}
+
+async function list(req, res, next){
   const {date} = req.query;
-  console.log("lineeeeeee",date)
-  const test  = req.params
-  console.log(test, "test")
    res.json({
     data: await service.listTodayReservations(date),
   });
 }
 
-
-function hasRequiredProperties(req, res, next) {
-  console.log("hasRequiredPropertiess")
-  const { data = {} } = req.body;
-  const missingProperties = [];
-  const invalidProperties = [];
-
-  requiredProperties.forEach((property) => {
-    if (!data[property]) {
-      missingProperties.push(`'${property}'`);
-    }
-  });
-
-  // Additional validation for specific data types
-  if (isNaN(Date.parse(data.reservation_date))) {
-    invalidProperties.push("'reservation_date' must be a valid date");
-  }
-  if (!/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(data.reservation_time)) {
-    invalidProperties.push("'reservation_time' must be a valid time");
-  }
-  if (isNaN(data.people) || typeof data.people !== 'number') {
-    invalidProperties.push("'people' must be a valid number");
-  }
-
-  if (missingProperties.length || invalidProperties.length) {
-    return next({
-      status: 400,
-      message: [
-        ...missingProperties.length ? [`Missing properties: ${missingProperties.join(", ")}`] : [],
-        ...invalidProperties,
-      ].join("; "),
-    });
-  }
-  next();
-}
-
-
 async function create(req, res){
-  console.log("Request body:", req.body);  
-  const data = await service.create(req.body.data);
-  console.log("Returned data:", data);  
-  res.status(201).json({data});
+  const resData = await service.create(req.body.data);
+  res.status(201).json({data:resData});
 }
-
-
 
 async function destroy(req,res){
   const { reservationId } = req.params;
   await service.destroy(reservationId )
-  res.sendStatus(204);
+  res.status(204);
 } 
 
 module.exports = {
   list:  asyncErrorBoundary(list),
-  create: [asyncErrorBoundary(hasRequiredProperties), asyncErrorBoundary(create)],
-  delete: asyncErrorBoundary(destroy)
+  create: [validDate, hasProperties(requiredProperties ), asyncErrorBoundary(create)],
+  delete: asyncErrorBoundary(destroy),
+  update:asyncErrorBoundary(update),
 };
 
 
