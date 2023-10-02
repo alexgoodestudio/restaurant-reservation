@@ -3,27 +3,30 @@ const reservationTable = "reservations";
 
 
 function listTodayReservations(date) {
-    return knex("reservations")
+    return knex(reservationTable)
         .select("*")
         .where({ reservation_date : date })
         .orderBy("reservation_time", "asc");
     }    
 
-async function create(newReservation) {
-    return knex("reservations")
+
+ function create(newReservation) {
+    return knex(reservationTable)
         .insert(newReservation)
         .returning("*")
         .then((createdRecords) => createdRecords[0]);
     }
 
-function destroy(reservation_id){
-    return knex(reservationTable).where({reservation_id : reservation_id}).del();
+
+function destroy(reservationId){
+    // console.log("Reservation ID to delete: ", reservationId); 
+    return knex(reservationTable).where({reservation_id : reservationId}).del();
 }
 
-function read(reservation_id){
-    return knex(reservationTable).select("*").where({ reservation_id: reservation_id}).first();
+function read(reservationId){
+    // console.log("Reservation ID to read:", reservationId); 
+    return knex(reservationTable).select("*").where({ reservation_id: reservationId}).first();
 }
-
 
 function update(updatedReservation){
     return knex(reservationTable)

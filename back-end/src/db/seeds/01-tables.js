@@ -5,3 +5,4 @@ exports.seed = function (knex) {
     return knex("tables").insert(data)
   });
 };
+

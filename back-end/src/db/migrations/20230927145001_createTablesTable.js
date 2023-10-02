@@ -4,10 +4,11 @@ exports.up = function (knex) {
     table.string("table_name").notNullable();
     table.integer("capacity").notNullable();
     table.integer("reservation_id").unsigned();  // Define the column type
-    table.foreign("reservation_id").references("reservation_id").inTable("reservations");  // Set as foreign key
+    table.foreign("reservation_id").references("reservation_id").inTable("reservations").onDelete('cascade');  // Set as foreign key
     // Add any other columns as needed
   });
 };
+
 
 exports.down = function (knex) {
   return knex.schema.dropTable("tables");
