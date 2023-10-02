@@ -4,8 +4,12 @@ const hasProperties = require("../errors/hasProperties");
 const tuesdayValidation = require("../errors/tuesdayValidation.js");
 const pastDate = require("../errors/pastDate")
 const peopleDataType = require("../errors/peopleDataType")
-const noNulls = require("../errors/noNulls");
+const noNulls = require("../errors/noNullsReservation");
 
+// USER STORY 3 validation for prevention of reservations being scheduled hour before close
+
+//USER STORY TWO |TUESDAY AND ONLY IN FUTURE
+//validation for prevention of reservations being scheduled in the past 
 const requiredProperties = [
   "first_name",
   "last_name",
@@ -14,12 +18,6 @@ const requiredProperties = [
   "reservation_time",
   "people",
 ];
-
-// USER STORY 3 validation for prevention of reservations being scheduled hour before close
-
-//USER STORY TWO |TUESDAY AND ONLY IN FUTURE
-//validation for prevention of reservations being scheduled in the past 
-
 
 async function read(req, res) {
   const { reservation_id } = req.params;
@@ -64,7 +62,7 @@ module.exports = {
   
   create: 
   [
-    asyncErrorBoundary(hasProperties(...requiredProperties)),
+    asyncErrorBoundary(hasProperties([...requiredProperties])),
     asyncErrorBoundary(noNulls),
     asyncErrorBoundary(peopleDataType),
     asyncErrorBoundary(pastDate),
