@@ -7,8 +7,8 @@ function tuesdayValidation(req,res,next){
     const numeralDay = reservationDate.getDay()
     // console.log(numeralDay,"rd3")
 
-    if(numeralDay == 2){
-      return res.status(400).send("closed");
+    if(numeralDay === 2){
+      return res.status(400).send("we are closed");
     }
     next();
   }

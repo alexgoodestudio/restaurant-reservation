@@ -1,7 +1,7 @@
 const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
-const tuesdayValidation = require("../errors/tuesdayValidation.js");
+const tuesdayValidation = require("../errors/tuesdayValidation");
 const pastDate = require("../errors/pastDate")
 const peopleDataType = require("../errors/peopleDataType")
 const noNulls = require("../errors/noNullsReservation");
@@ -64,9 +64,9 @@ module.exports = {
   [
     asyncErrorBoundary(hasProperties([...requiredProperties])),
     asyncErrorBoundary(noNulls),
-    asyncErrorBoundary(peopleDataType),
-    asyncErrorBoundary(pastDate),
     asyncErrorBoundary(tuesdayValidation),
+    asyncErrorBoundary(pastDate),
+    asyncErrorBoundary(peopleDataType),
     asyncErrorBoundary(create)
   ],
 

@@ -2,6 +2,8 @@ const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const noNulls = require("../errors/noNullsTable");
 const hasProperties = require("../errors/hasProperties");
+const length = require("../errors/length");
+const capacity = require("../errors/capacity");
 
 const requiredProperties = [
   "table_name",
@@ -10,7 +12,7 @@ const requiredProperties = [
 ];
 
 async function create(req, res) {
-  console.log("Request body:", req.body);  
+  console.log("Request body:", req.body.data);  
   const data = await service.create(req.body.data);
   console.log("Returned data:", data);  
   res.status(201).json({data});
@@ -32,7 +34,8 @@ async function read(req, res) {
 }
 console.log(...requiredProperties)
 module.exports = {
-  create: [asyncErrorBoundary(noNulls), asyncErrorBoundary(hasProperties([...requiredProperties])), asyncErrorBoundary(create)],
+  create: [asyncErrorBoundary(noNulls),asyncErrorBoundary(length),asyncErrorBoundary(capacity), asyncErrorBoundary(hasProperties([...requiredProperties])),asyncErrorBoundary(create)],
   list: asyncErrorBoundary(list), 
   read: asyncErrorBoundary(read), 
 };
+
