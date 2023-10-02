@@ -6,8 +6,10 @@ import { today } from "../utils/date-time";
 import Search from "../components/Search";
 import NewForm from "../components/NewForm";
 import EditForm from "../components/EditForm";
+import useQuery from "../utils/useQuery"
 
 function Routes() {
+  const query = useQuery()
   return (
     <Switch>
       <Route exact path="/">
@@ -17,13 +19,13 @@ function Routes() {
         <Redirect to={"/dashboard"} />
       </Route>
       <Route path="/dashboard">
-        <Dashboard date={today()} />
-      </Route>
-      <Route exact path="/reservations/:reservation_id/edit">
-        <EditForm />
+        <Dashboard date={query.get("date") || today()} />
       </Route>
       <Route exact path="/reservations/new">
         <NewForm />
+      </Route>
+      <Route exact path="/reservations/:reservation_id/edit">
+        <EditForm />
       </Route>
       <Route exact path="/search">
         <Search />

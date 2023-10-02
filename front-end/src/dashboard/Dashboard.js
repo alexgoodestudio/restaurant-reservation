@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { listReservations } from "../utils/api";
+import { listReservations, cancelReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
+import Reservations from "../components/Reservations";
+
 
 
 /**
@@ -23,6 +25,10 @@ function Dashboard({ date }) {
       .catch(setReservationsError);
     return () => abortController.abort();
   }
+  function onCancel(reservation_id){
+    //come back and write API call to cancel Reservation 
+    cancelReservation(reservation_id).then(loadDashboard).catch(setReservationsError)
+  }
 
   return (
     <main>
@@ -30,23 +36,27 @@ function Dashboard({ date }) {
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for date</h4>
       </div>
-      <div className="alert alert-danger">
+     
       <ErrorAlert error={reservationsError} />
-      </div>
+      <Reservations reservations={reservations} onCancel={onCancel}/>
+  
 
 
 
-      {reservations.map((reservation, index) => (
+      {/* {reservations.map((reservation, index) => (
         <div key={index} className="bg-light mt-5">
-          {/* {JSON.stringify(reservations)} */}
+          {JSON.stringify(reservation)}
+          
           Name: {reservation.first_name} {reservation.last_name} |
           Reservation ID: {reservation.reservation_id} <br/>
           <button className="btn btn-primary m-2">Submit</button>
           <button className="btn btn-secondary m-2">Booked</button>
           <button className="btn btn-secondary m-2">Seat</button>
           <button className="btn btn-secondary m-2">Edit</button>
+     
+
         </div>
-      ))}
+      ))} */}
 
  
     </main>

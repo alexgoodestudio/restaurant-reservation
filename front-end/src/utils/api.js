@@ -67,3 +67,18 @@ export async function listReservations(params, signal) {
     .then(formatReservationDate)
     .then(formatReservationTime);
 }
+
+export async function cancelReservation(reservationId, signal){
+  const url = `${API_BASE_URL}/reservations/${reservationId}/status`;
+  const options = { 
+    method: "PUT",
+    headers,
+    body: JSON.stringify({
+      data: {
+        status: "cancelled",
+      },
+    }),
+    signal, 
+  };
+  return await fetchJson(url, options, {})
+}
