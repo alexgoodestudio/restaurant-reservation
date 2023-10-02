@@ -1,14 +1,31 @@
 function tuesdayValidation(req,res,next){
-
-    const { reservation_date } = req.body.data;
-    // console.log(reservation_date,"rd1");
-    const reservationDate = new Date(reservation_date);
-    // console.log(reservationDate,"rd2");
+    const { reservation_date, reservation_time } = req.body.data;
+    const reservationDate = new Date(
+      `${reservation_date}T${reservation_time}:00Z`
+    );
+    res.locals.time = reservationDate;
+    const today = new Date();
     const numeralDay = reservationDate.getDay()
-    // console.log(numeralDay,"rd3")
+
+    if(isNaN(numeralDay)){
+      next({
+        message:`reservation_date/ reservation_time incorrect`,
+        status: 400,
+      })
+    }
 
     if(numeralDay === 2){
-      return res.status(400).send("we are closed");
+      next({
+        message:`closed`,
+        status: 400,
+      })
+      // return res.status(400).send("we are closed");
+    }
+    if(reservationDate < today){
+      next({
+        message:`future`,
+        status: 400,
+      })
     }
     next();
   }
