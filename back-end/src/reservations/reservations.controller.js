@@ -4,7 +4,7 @@ const hasProperties = require("../errors/hasProperties");
 const tuesdayValidation = require("../errors/tuesdayValidation");
 const pastDate = require("../errors/pastDate")
 const peopleDataType = require("../errors/peopleDataType")
-const noNulls = require("../errors/noNullsReservation");
+const validateDateAndTime = require("../errors/validateDateAndTime")
 
 // USER STORY 3 validation for prevention of reservations being scheduled hour before close
 
@@ -16,7 +16,7 @@ const requiredProperties = [
   "mobile_number",
   "reservation_date",
   "reservation_time",
-  "people",
+  "people"
 ];
 
 async function read(req, res) {
@@ -45,9 +45,9 @@ async function list(req, res, next){
 }
 
 async function create(req, res){
-  // console.log("Request body:", req.body);  
+  console.log("Reached Create Controller Function:", req.body.data);  
   const data = await service.create(req.body.data);
-  // console.log("Returned data:", data);  
+  console.log("Returned data:", data);  
   res.status(201).json({data});
 }
 
@@ -61,14 +61,15 @@ module.exports = {
   list:  asyncErrorBoundary(list),
   
   create: 
-  [
-    asyncErrorBoundary(hasProperties([...requiredProperties])),
-    asyncErrorBoundary(noNulls),
-    asyncErrorBoundary(tuesdayValidation),
-    asyncErrorBoundary(pastDate),
-    asyncErrorBoundary(peopleDataType),
-    asyncErrorBoundary(create)
-  ],
+    [
+      asyncErrorBoundary(hasProperties([...requiredProperties])),
+      tuesdayValidation,
+      pastDate,
+      peopleDataType,
+      validateDateAndTime,
+      asyncErrorBoundary(create)
+    ]
+  ,
 
   delete: asyncErrorBoundary(destroy),
  

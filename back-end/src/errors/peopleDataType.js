@@ -1,12 +1,12 @@
 function peopleDataType(req, res, next) {
     const { people } = req.body.data;
-    // console.log(typeof people)
-    // console.log(people, typeof people, "request body")
-    if (isNaN(people) || people === null) {
-        // console.log("reached peopleDataType")
-        return res.status(400).send("The 'people' field must be a number and cannot be null.");
+    if (!Number.isInteger(people) && !people > 0) {
+        console.log("reached peopleDataType")
+        const error = new Error("A 'people' property is required.")
+        error.status = 400
+        throw error;
+        // return res.status(400).error("A 'people' property is required.");
     }
-  
     next();
   }
   
