@@ -13,8 +13,11 @@ function list(table_id){
 }
 
 function create(data) {
+  console.log(data,"SERVICE")
   return knex('tables')
-    .insert(data);
+    .insert(data)
+    .returning('*')
+    .then((rows) => rows[0]);
 }
 
 module.exports = {
