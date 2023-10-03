@@ -1,7 +1,8 @@
 const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
-const length = require("../errors/length");
+// const length = require("../errors/length");
+const tableExists = require("../errors/tableExists");
 const capacity = require("../errors/capacity");
 
 const requiredProperties = [
@@ -9,6 +10,18 @@ const requiredProperties = [
     "table_id",
     "capacity"
 ];
+  
+const environment = process.env.NODE_ENV;
+
+if (environment === 'development') {
+  console.log("You're in the Development environment");
+} else if (environment === 'production') {
+  console.log("You're in the Production environment");
+} else if (environment === 'test') {
+  console.log("You're in the Test environment");
+} else {
+  console.log("Environment not recognized or NODE_ENV is not set");
+}
 
 async function create(req, res) {
     console.log("Request body:", req.body.data);
@@ -31,12 +44,20 @@ async function read(req, res) {
 }
 
 module.exports = {
-    create: [asyncErrorBoundary(length), 
+    create: [
+        // asyncErrorBoundary(length), 
         asyncErrorBoundary(capacity),
         asyncErrorBoundary(hasProperties([...requiredProperties])), 
-        asyncErrorBoundary(create)],
+        asyncErrorBoundary(create)
+    ],
         
-    list: asyncErrorBoundary(list),
-    read: asyncErrorBoundary(read),
+    list: [
+        asyncErrorBoundary(tableExists),
+        asyncErrorBoundary(list)
+    ],
+    read: [
+        asyncErrorBoundary(tableExists),
+        asyncErrorBoundary(read)
+    ],
 };
 
