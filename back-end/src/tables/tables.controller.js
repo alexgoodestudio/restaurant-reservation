@@ -29,7 +29,7 @@ async function read(req, res) {
     const data = await service.read(table_id);
     res.status(200).json({ data });
 }
-// console.log(...requiredProperties)
+
 module.exports = {
     create: [asyncErrorBoundary(length), 
         asyncErrorBoundary(capacity),
