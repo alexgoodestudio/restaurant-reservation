@@ -82,3 +82,19 @@ export async function cancelReservation(reservationId, signal){
   };
   return await fetchJson(url, options, {})
 }
+//check function name
+export async function createReservation(reservation, signal){
+  console.log(reservation)
+  const url = `${API_BASE_URL}/reservations/`;
+  const options = { 
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      data: {
+        reservation:reservation,
+      },
+    }),
+    signal, 
+  };
+  return await fetchJson(url, options, {})
+}

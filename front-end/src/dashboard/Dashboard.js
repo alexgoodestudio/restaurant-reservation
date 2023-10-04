@@ -36,28 +36,11 @@ function Dashboard({ date }) {
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for date</h4>
       </div>
+     <div>
      
+     </div>
       <ErrorAlert error={reservationsError} />
       <Reservations reservations={reservations} onCancel={onCancel}/>
-  
-
-
-
-      {/* {reservations.map((reservation, index) => (
-        <div key={index} className="bg-light mt-5">
-          {JSON.stringify(reservation)}
-          
-          Name: {reservation.first_name} {reservation.last_name} |
-          Reservation ID: {reservation.reservation_id} <br/>
-          <button className="btn btn-primary m-2">Submit</button>
-          <button className="btn btn-secondary m-2">Booked</button>
-          <button className="btn btn-secondary m-2">Seat</button>
-          <button className="btn btn-secondary m-2">Edit</button>
-     
-
-        </div>
-      ))} */}
-
  
     </main>
   );
