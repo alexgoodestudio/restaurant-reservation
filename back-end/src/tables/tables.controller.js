@@ -5,11 +5,16 @@ const length = require("../errors/length");
 const tableExists = require("../errors/tableExists");
 const capacity = require("../errors/capacity");
 const dataExists = require("../errors/dataExists")
+// const reservationExists = require("../errors/reservationExists");
+const hasReservationID = require("../errors/hasreservationID")
+
+
+
 const requiredProperties = [
     "table_name",
-    "capacity"
+    "capacity",
 ];
-  
+
 // const environment = process.env.NODE_ENV;
 
 // if (environment === 'development') {
@@ -29,7 +34,7 @@ async function create(req, res) {
 
 async function list(req, res, next) {
     const { table_id } = req.query;
-    res.json({
+    res.status(200).json({
         data: await service.list(table_id),
     });
 }
@@ -37,8 +42,18 @@ async function list(req, res, next) {
 async function read(req, res) {
     const { table_id } = req.params;
     const data = await service.read(table_id);
-    res.status(200).json({ data });
+    res.json({ data });
 }
+
+
+async function update(req,res){
+    const {table_id} = req.params;
+    console.log("The Table ID is:", table_id)
+    const data = await service.read(table_id);
+    const {status} = req.body.data;
+    const updatedData = {...data,status:status};
+    res.status(200).json({data:updatedData})  
+  }
 
 module.exports = {
     create: [
@@ -50,12 +65,19 @@ module.exports = {
     ],
         
     list: [
-        asyncErrorBoundary(tableExists),
+        
         asyncErrorBoundary(list)
     ],
     read: [
         asyncErrorBoundary(tableExists),
         asyncErrorBoundary(read)
     ],
+    update:[
+        asyncErrorBoundary(dataExists),
+        asyncErrorBoundary(hasReservationID),
+        asyncErrorBoundary(capacity),
+        asyncErrorBoundary(hasProperties([...requiredProperties])),  
+        asyncErrorBoundary(update)
+    ]
 };
 

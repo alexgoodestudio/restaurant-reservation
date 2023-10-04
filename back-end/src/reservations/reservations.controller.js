@@ -6,7 +6,6 @@ const hasEnoughPeople = require("../errors/hasEnoughPeople")
 const validateDateAndTime = require("../errors/validateDateAndTime")
 const tuesdayValidation = require("../errors/tuesdayValidation")
 const reservationExists = require("../errors/reservationExists")
-
 // USER STORY 3 validation for prevention of reservations being scheduled hour before close
 
 //USER STORY TWO |TUESDAY AND ONLY IN FUTURE
@@ -19,7 +18,6 @@ const requiredProperties = [
   "reservation_time",
   "people"
 ];
-
 
 async function read(req, res) {
   const data = res.locals.reservation;

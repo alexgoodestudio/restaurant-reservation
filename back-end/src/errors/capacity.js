@@ -1,12 +1,11 @@
 function capacity(req, res, next) {
     const { capacity } = req.body.data;
-    if (typeof(capacity) !== "number" || !capacity || capacity === ""  || capacity === 0) {
+    if (typeof capacity !== "number" || capacity < 1) {
    
-        next({
+      return next({
             status:400,
             message:"The 'capacity' field must be a number and cannot be null or empty."
         })
-
     }
     next();
 }

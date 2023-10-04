@@ -3,22 +3,22 @@ const knex = require("../db/connection");
 function read(id) {
   return knex('tables')
     .where({table_id: id})
-    .first();
+    .first()
 }
 
-function list(table_id){
+function list(){
     return knex('tables')
     .select("*")
-    .where({ table_id: table_id });
+    .orderBy('table_name','asc')
 }
 
 function create(data) {
-  console.log(data,"SERVICE")
   return knex('tables')
     .insert(data)
     .returning('*')
     .then((rows) => rows[0]);
 }
+
 
 module.exports = {
   create,
