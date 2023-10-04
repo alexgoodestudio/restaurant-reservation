@@ -5,8 +5,8 @@ const length = require("../errors/length");
 const tableExists = require("../errors/tableExists");
 const capacity = require("../errors/capacity");
 const dataExists = require("../errors/dataExists")
-// const reservationExists = require("../errors/reservationExists");
-const hasReservationID = require("../errors/hasreservationID")
+const hasReservationID = require("../errors/hasReservationID");
+const tableIsOccupied = require("../errors/tableIsOccupied");
 
 
 
@@ -73,6 +73,7 @@ module.exports = {
         asyncErrorBoundary(read)
     ],
     update:[
+        // asyncErrorBoundary(tableIsOccupied),
         asyncErrorBoundary(dataExists),
         asyncErrorBoundary(hasReservationID),
         asyncErrorBoundary(capacity),
