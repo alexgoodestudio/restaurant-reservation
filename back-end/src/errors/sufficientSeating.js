@@ -7,7 +7,7 @@ async function sufficientSeating(req,res,next){
     // console.log(typeof table.capacity,"I am a damn table")
     // console.log(typeof reservation.people,"I am a damn reservation")
     if(reservation.people > table.capacity){
-        console.log("capacity if statement");
+        // console.log("capacity if statement");
         next({
             message: "reservation is higher than capacity",
             status: 400,

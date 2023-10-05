@@ -1,5 +1,5 @@
 function hasReservationID(req, res, next) {
-    console.log("hasReservationID");
+    // console.log("hasReservationID");
     const reservation_id = req.params.reservation_id || req.body?.data?.reservation_id;
     if(reservation_id){
         res.locals.reservation_id = reservation_id;

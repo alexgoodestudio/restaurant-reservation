@@ -9,6 +9,8 @@ const hasReservationID = require("../errors/hasReservationID");
 const tableOccupied = require("../errors/tableOccupied");
 const reservationExist = require("../errors/reservationExists")
 const sufficientSeating = require("../errors/sufficientSeating")
+const us5occupied = require("../errors/us5occupied")
+
 
 const requiredProperties = [
     "table_name",
@@ -55,24 +57,26 @@ async function update(req,res){
     // console.log("UPDATE")
     const {table_id} = req.params;
     const reservationId = res.locals.reservation_id
-    // console.log("The Table ID is:", table_id)
     const data = await service.read(table_id);
-    // console.log(data,"line 52")
     const updatedData = {...data,
     reservation_id : reservationId,
     status : "occupied"
     };
     
     await service.update(updatedData)
-    console.log(updatedData,"*8888888888888888888")
     res.status(200).json({data:updatedData})  
   }
 
 async function destroy(req,res){
-const reservation_id = req.body.data
- await service.destroy(reservation_id)
-res.sendStatus(204);
-}
+    console.log("line 70", res.locals.table);
+    const tableId = req.params.table_id;
+    console.log(tableId,"table destroy")
+    const data= await service.destroy(tableId)
+    console.log(data,"after data line")
+    res.json({
+        data
+        })
+    }
 
 module.exports = {
     create: [
@@ -99,9 +103,11 @@ module.exports = {
         asyncErrorBoundary(tableOccupied),
         asyncErrorBoundary(update)
     ],
-
-
+//res id / table id
     destroy:[
+        asyncErrorBoundary(tableExists),
+        asyncErrorBoundary(tableOccupied),
+        asyncErrorBoundary(us5occupied),
         asyncErrorBoundary(destroy)
     ]
 };

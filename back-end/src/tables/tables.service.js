@@ -25,9 +25,10 @@ function create(data) {
     .returning('*')
     .then((rows) => rows[0]);
 }
-function destroy(reservation_id){
-return knex('reservations')
-  .where({reservation_id : reservation_id})
+function destroy(tableId){
+console.log(tableId,"qqqqqqqaaaaaaaa")
+return knex('tables')
+  .where({table_id : tableId})
   .del()
 }
 
