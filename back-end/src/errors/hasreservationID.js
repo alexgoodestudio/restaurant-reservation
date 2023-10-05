@@ -1,11 +1,8 @@
-// ✕ returns 400 if reservation_id is missing (482 ms)
-
-
 function hasReservationID(req, res, next) {
-    const reservation = req.params.reservation_id || req.body?.data?.reservation_id;
-
-    if(reservation){
-        res.locals.reservation_id = reservation;
+    console.log("hasReservationID");
+    const reservation_id = req.params.reservation_id || req.body?.data?.reservation_id;
+    if(reservation_id){
+        res.locals.reservation_id = reservation_id;
         next();
     } else {
         next({

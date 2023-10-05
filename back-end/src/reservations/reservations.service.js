@@ -26,14 +26,8 @@ function read(reservationId){
 
 function search(mobile_number){
     return knex('reservations')
+    .select("*").where({mobile_number: mobile_number})
 }
-
-// function update(updatedReservation){
-//     return knex('reservations')
-//         .select("*")
-//         .where({reservation_id: updatedReservation.reservation_id})
-//         .update(updatedReservation, "*")
-// }
 
 module.exports = {
     list,
@@ -41,5 +35,4 @@ module.exports = {
     destroy,
     read,
     search,
-    // update,
 }

@@ -1,4 +1,5 @@
 function dataExists(req,res,next){
+  console.log("dataExists");
 if(!req.body.data){
     return next({
       status:400,

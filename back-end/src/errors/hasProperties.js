@@ -8,9 +8,10 @@
 
 
 function hasProperties(requiredProperties) {
+  // console.log("hasProperties");
   return function (req, res, next) { 
     const { data = {} } = req.body; 
-    
+    // console.log("HASPROPERTIESDATA",data)
     try {
       requiredProperties.forEach((property) => {
         const value = data[property];
@@ -31,6 +32,6 @@ function hasProperties(requiredProperties) {
 }
 
   
-  module.exports = hasProperties;
+module.exports = hasProperties;
   
   

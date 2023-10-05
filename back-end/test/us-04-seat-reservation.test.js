@@ -254,7 +254,7 @@ describe("US-04 - Seat reservation", () => {
 
       test("returns 400 if table is occupied", async () => {
         expect(tableOne).not.toBeUndefined();
-
+        console.log(tableOne,"^^^^^^^^^^^^^^")
         // first, occupy the table
         const occupyResponse = await request(app)
           .put(`/tables/${tableOne.table_id}/seat`)

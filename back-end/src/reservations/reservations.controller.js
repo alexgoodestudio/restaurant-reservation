@@ -6,6 +6,7 @@ const hasEnoughPeople = require("../errors/hasEnoughPeople")
 const validateDateAndTime = require("../errors/validateDateAndTime")
 const tuesdayValidation = require("../errors/tuesdayValidation")
 const reservationExists = require("../errors/reservationExists")
+const hasReservationID = require("../errors/hasReservationID")
 // USER STORY 3 validation for prevention of reservations being scheduled hour before close
 
 //USER STORY TWO |TUESDAY AND ONLY IN FUTURE
@@ -20,9 +21,12 @@ const requiredProperties = [
 ];
 
 async function read(req, res) {
-  const data = res.locals.reservation;
+  const reservationId = res.locals.reservation_id;
+  // console.log(reservationId,"((((((((((((((((%%%%%%%%%%%%%%");
+  const readReservationID = await service.read(reservationId)
+  console.log(readReservationID,")))))))))))))))))))))")
   res.status(200).json({
-    data,
+    data: readReservationID,
   })
 }
 
@@ -58,6 +62,8 @@ async function destroy(req,res){
   res.status(204).send("deleted");
 } 
 
+
+
 module.exports = {
   list:  asyncErrorBoundary(list),
   create: 
@@ -77,8 +83,12 @@ module.exports = {
     validateDateAndTime,
     asyncErrorBoundary(update)
   ],
+
+
   read:[
+       asyncErrorBoundary(hasReservationID),
        asyncErrorBoundary(reservationExists),
-       asyncErrorBoundary(read)],
+       asyncErrorBoundary(read)
+      ],
 };
 
