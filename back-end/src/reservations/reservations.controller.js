@@ -1,12 +1,14 @@
 const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
-const pastDate = require("../errors/pastDate")
-const hasEnoughPeople = require("../errors/hasEnoughPeople")
-const validateDateAndTime = require("../errors/validateDateAndTime")
-const tuesdayValidation = require("../errors/tuesdayValidation")
-const reservationExists = require("../errors/reservationExists")
-const hasReservationID = require("../errors/hasReservationID")
+const pastDate = require("../errors/pastDate");
+const hasEnoughPeople = require("../errors/hasEnoughPeople");
+const validateDateAndTime = require("../errors/validateDateAndTime");
+const tuesdayValidation = require("../errors/tuesdayValidation");
+const reservationExists = require("../errors/reservationExists");
+const hasReservationID = require("../errors/hasReservationID");
+const reservationStatusErrors = require("../errors/reservationStatusErrors");
+const booked = require("../errors/booked");
 // USER STORY 3 validation for prevention of reservations being scheduled hour before close
 
 //USER STORY TWO |TUESDAY AND ONLY IN FUTURE
@@ -72,6 +74,8 @@ module.exports = {
       tuesdayValidation,
       hasEnoughPeople,
       pastDate, 
+      booked,
+      reservationStatusErrors,
       validateDateAndTime,
       asyncErrorBoundary(create)
     ],

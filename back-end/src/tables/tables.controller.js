@@ -10,7 +10,7 @@ const tableOccupied = require("../errors/tableOccupied");
 const reservationExist = require("../errors/reservationExists")
 const sufficientSeating = require("../errors/sufficientSeating")
 const us5_notOccupied = require("../errors/us5_notOccupied")
-// const finished = require("../errors/finished")
+const finished = require("../errors/finished")
 
 const requiredProperties = [
     "table_name",
@@ -104,7 +104,7 @@ module.exports = {
         asyncErrorBoundary(tableExists),
         asyncErrorBoundary(tableOccupied),
         asyncErrorBoundary(us5_notOccupied),
-        // asyncErrorBoundary(finished),
+        asyncErrorBoundary(finished),
         asyncErrorBoundary(destroy)
     ]
 };

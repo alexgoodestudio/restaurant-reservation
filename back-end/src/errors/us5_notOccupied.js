@@ -1,9 +1,7 @@
 function us5_notOccupied(req,res,next){
 const {reservation_id} = res.locals.table
-console.log(reservation_id,"UUUUUUUU")
-if(!reservation_id){
-    
-    
+if(reservation_id !== "occupied"){
+     
      next({
         message: "Table is not occupied",
         status: 400,
