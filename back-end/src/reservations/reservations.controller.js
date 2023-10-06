@@ -6,6 +6,9 @@ const hasEnoughPeople = require("../errors/hasEnoughPeople");
 const validateDateAndTime = require("../errors/validateDateAndTime");
 const tuesdayValidation = require("../errors/tuesdayValidation");
 const reservationExists = require("../errors/reservationExists");
+const reservationExists2 = require("../errors/reservationExists2");
+const hasProperties2 = require("../errors/hasProperties2")
+const reservationFinished = require("../errors/reservationFinished")
 const hasReservationID = require("../errors/hasReservationID");
 const reservationStatusErrors = require("../errors/reservationStatusErrors");
 const booked = require("../errors/booked");
@@ -22,11 +25,16 @@ const requiredProperties = [
   "people"
 ];
 
+const statusProperties=[
+"booked",
+"seated",
+"finished"
+]
+
 async function read(req, res) {
   const reservationId = res.locals.reservation_id;
   // console.log(reservationId,"((((((((((((((((%%%%%%%%%%%%%%");
   const readReservationID = await service.read(reservationId)
-  console.log(readReservationID,")))))))))))))))))))))")
   res.status(200).json({
     data: readReservationID,
   })
@@ -53,7 +61,7 @@ async function list(req, res) {
 }
 
 async function create(req, res){
-  console.log(req.body.data)
+  // console.log(req.body.data)
   const data = await service.create(req.body.data);
   res.status(201).json({data});
 }
@@ -64,7 +72,21 @@ async function destroy(req,res){
   res.status(204).send("deleted");
 } 
 
-
+async function updateStatus(req,res,){
+  console.log("I've made it to updateStatus function")
+  const reservationId = req.params.reservation_id
+  const data = await service.read(reservationId)
+  const updatedObject = {...data,
+      reservation_id : reservationId,
+      status : req.body.data.status
+  }
+    console.log(updatedObject,"Updated Object from updateStatus")
+    const data2 = await service.updateStatus(updatedObject)
+    console.log("datttaaa2",data2)
+    res.status(200).json({
+      data: data2
+    })
+}
 
 module.exports = {
   list:  asyncErrorBoundary(list),
@@ -79,15 +101,24 @@ module.exports = {
       validateDateAndTime,
       asyncErrorBoundary(create)
     ],
-  delete: [asyncErrorBoundary(reservationExists),asyncErrorBoundary(destroy)],
+  delete: [asyncErrorBoundary(reservationExists),
+      asyncErrorBoundary(destroy)],
   
-  update:[asyncErrorBoundary(reservationExists),
-    tuesdayValidation,
-    hasEnoughPeople,
-    pastDate, 
-    validateDateAndTime,
-    asyncErrorBoundary(update)
+  update:[
+      asyncErrorBoundary(reservationExists),
+      tuesdayValidation,
+      hasEnoughPeople,
+      pastDate, 
+      validateDateAndTime,
+      asyncErrorBoundary(update)
   ],
+
+  updateStatus:[
+      asyncErrorBoundary(reservationExists2),
+      asyncErrorBoundary(hasProperties2([...statusProperties])),
+      reservationFinished,
+      asyncErrorBoundary(updateStatus)
+    ],
 
 
   read:[

@@ -17,16 +17,30 @@ function list(date = today()) {
     }
 
 function destroy(reservationId){
-    return knex('reservations').where({reservation_id : reservationId}).del();
+    return knex('reservations')
+    .where({reservation_id : reservationId})
+    .del();
 }
 
 function read(reservationId){
-    return knex('reservations').select("*").where({ reservation_id: reservationId}).first();
+    return knex('reservations')
+    .select("*")
+    .where({ reservation_id: reservationId})
+    .first();
 }
 
 function search(mobile_number){
     return knex('reservations')
     .select("*").where({mobile_number: mobile_number})
+}
+
+function updateStatus(reservation){
+console.log("you are at the service function updatestatus")
+return knex('reservations')
+.select("*")
+.where({reservation_id : reservation.reservation_id})
+.update(reservation,"*")
+.then((data) => data[0])
 }
 
 module.exports = {
@@ -35,4 +49,5 @@ module.exports = {
     destroy,
     read,
     search,
+    updateStatus,
 }

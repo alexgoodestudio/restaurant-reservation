@@ -9,7 +9,7 @@ const reservationDateTimeStamp =reservationDate.getTime();
 
 
     if(todayTimeStamp > reservationDateTimeStamp){
-      console.log("compared dates in pastDate validator")
+      // console.log("compared dates in pastDate validator")
         return res.status(400).send("future")
     }
     next()

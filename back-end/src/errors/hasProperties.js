@@ -11,6 +11,7 @@ function hasProperties(requiredProperties) {
   // console.log("hasProperties");
   return function (req, res, next) { 
     const { data = {} } = req.body; 
+    
     // console.log("HASPROPERTIESDATA",data)
     try {
       requiredProperties.forEach((property) => {

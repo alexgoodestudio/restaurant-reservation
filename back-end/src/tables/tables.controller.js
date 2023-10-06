@@ -11,6 +11,7 @@ const reservationExist = require("../errors/reservationExists")
 const sufficientSeating = require("../errors/sufficientSeating")
 const us5_notOccupied = require("../errors/us5_notOccupied")
 const finished = require("../errors/finished")
+const notFound2 = require("../errors/notFound2")
 
 const requiredProperties = [
     "table_name",
@@ -54,7 +55,6 @@ async function read(req, res) {
 
 
 async function update(req,res){
-    // console.log("UPDATE")
     const {table_id} = req.params;
     const reservationId = res.locals.reservation_id
     const data = await service.read(table_id);
@@ -66,6 +66,11 @@ async function update(req,res){
     await service.update(updatedData)
     res.status(200).json({data:updatedData})  
   }
+
+//when guest leave on the tables table I want to be able to switch occupied to free. 
+//and then on reservations table I can delete reservation? 
+
+
 async function destroy(req,res){
     const tableId = res.locals.tables.table_id;
     const data= await service.destroy(tableId)
@@ -92,8 +97,9 @@ module.exports = {
         asyncErrorBoundary(read)
     ],
     update:[
+        notFound2,
         asyncErrorBoundary(hasProperties([...requiredProperties2])),  
-        asyncErrorBoundary(hasReservationID),
+        asyncErrorBoundary(hasReservationID),//set res.locals.reservation_id = reservation_id;
         asyncErrorBoundary(reservationExist),
         asyncErrorBoundary(sufficientSeating),
         asyncErrorBoundary(tableOccupied),
@@ -108,4 +114,3 @@ module.exports = {
         asyncErrorBoundary(destroy)
     ]
 };
-
