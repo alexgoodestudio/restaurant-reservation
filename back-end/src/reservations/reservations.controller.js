@@ -76,6 +76,7 @@ module.exports = {
       asyncErrorBoundary(create)
     ],
   delete: [asyncErrorBoundary(reservationExists),asyncErrorBoundary(destroy)],
+  
   update:[asyncErrorBoundary(reservationExists),
     tuesdayValidation,
     hasEnoughPeople,

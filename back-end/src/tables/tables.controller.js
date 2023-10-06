@@ -9,8 +9,8 @@ const hasReservationID = require("../errors/hasReservationID");
 const tableOccupied = require("../errors/tableOccupied");
 const reservationExist = require("../errors/reservationExists")
 const sufficientSeating = require("../errors/sufficientSeating")
-const us5occupied = require("../errors/us5occupied")
-
+const us5_notOccupied = require("../errors/us5_notOccupied")
+// const finished = require("../errors/finished")
 
 const requiredProperties = [
     "table_name",
@@ -21,17 +21,17 @@ const requiredProperties2 = [
 ];
 
 
-const environment = process.env.NODE_ENV;
+// const environment = process.env.NODE_ENV;
 
-if (environment === 'development') {
-  console.log("You're in the Development environment");
-} else if (environment === 'production') {
-  console.log("You're in the Production environment");
-} else if (environment === 'test') {
-  console.log("You're in the Test environment");
-} else {
-  console.log("Environment not recognized or NODE_ENV is not set");
-}
+// if (environment === 'development') {
+//   console.log("You're in the Development environment");
+// } else if (environment === 'production') {
+//   console.log("You're in the Production environment");
+// } else if (environment === 'test') {
+//   console.log("You're in the Test environment");
+// } else {
+//   console.log("Environment not recognized or NODE_ENV is not set");
+// }
 
 
 async function create(req, res) {
@@ -66,13 +66,9 @@ async function update(req,res){
     await service.update(updatedData)
     res.status(200).json({data:updatedData})  
   }
-
 async function destroy(req,res){
-    console.log("line 70", res.locals.table);
-    const tableId = req.params.table_id;
-    console.log(tableId,"table destroy")
+    const tableId = res.locals.tables.table_id;
     const data= await service.destroy(tableId)
-    console.log(data,"after data line")
     res.json({
         data
         })
@@ -103,11 +99,12 @@ module.exports = {
         asyncErrorBoundary(tableOccupied),
         asyncErrorBoundary(update)
     ],
-//res id / table id
+
     destroy:[
         asyncErrorBoundary(tableExists),
         asyncErrorBoundary(tableOccupied),
-        asyncErrorBoundary(us5occupied),
+        asyncErrorBoundary(us5_notOccupied),
+        // asyncErrorBoundary(finished),
         asyncErrorBoundary(destroy)
     ]
 };

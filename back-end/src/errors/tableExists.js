@@ -1,7 +1,7 @@
 const service = require("../tables/tables.service");
 
 async function tableExists(req, res, next) {
-    console.log("TABLE EXISTS")
+    // console.log("TABLE EXISTS")
     const { table_id } = req.params;
     const table = await service.read(table_id);
     res.locals.table = table;
