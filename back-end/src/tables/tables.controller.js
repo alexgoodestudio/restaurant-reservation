@@ -6,12 +6,11 @@ const tableExists = require("../errors/tableExists");
 const capacity = require("../errors/capacity");
 const dataExists = require("../errors/dataExists")
 const hasReservationID = require("../errors/hasReservationID");
-const tableOccupied = require("../errors/tableOccupied");
+const tableNotOccupied = require("../errors/tableNotOccupied");
 const reservationExist = require("../errors/reservationExists")
 const sufficientSeating = require("../errors/sufficientSeating")
-const us5_notOccupied = require("../errors/us5_notOccupied")
-const finished = require("../errors/finished")
 const notFound2 = require("../errors/notFound2")
+const completed = require("../errors/completed")
 
 const requiredProperties = [
     "table_name",
@@ -22,22 +21,17 @@ const requiredProperties2 = [
 ];
 
 
-// const environment = process.env.NODE_ENV;
-
-// if (environment === 'development') {
-//   console.log("You're in the Development environment");
-// } else if (environment === 'production') {
-//   console.log("You're in the Production environment");
-// } else if (environment === 'test') {
-//   console.log("You're in the Test environment");
-// } else {
-//   console.log("Environment not recognized or NODE_ENV is not set");
-// }
-
+async function finished(req, res, next) {
+    console.log("FINISHEDDDDD!!!!")
+    const data = await service.finish(res.locals.table)
+    res.json({
+        data
+    })
+}
 
 async function create(req, res) {
     const data = await service.create(req.body.data)
-    res.status(201).json( {data} )
+    res.status(201).json({ data })
 }
 
 async function list(req, res, next) {
@@ -54,63 +48,61 @@ async function read(req, res) {
 }
 
 
-async function update(req,res){
-    const {table_id} = req.params;
+async function update(req, res) {
+    const { table_id } = req.params;
     const reservationId = res.locals.reservation_id
     const data = await service.read(table_id);
-    const updatedData = {...data,
-    reservation_id : reservationId,
-    status : "occupied"
+    const updatedData = {
+        ...data,
+        reservation_id: reservationId,
+        status: "occupied"
     };
-    
+
     await service.update(updatedData)
-    res.status(200).json({data:updatedData})  
-  }
-
-//when guest leave on the tables table I want to be able to switch occupied to free. 
-//and then on reservations table I can delete reservation? 
+    res.status(200).json({ data: updatedData })
+}
 
 
-async function destroy(req,res){
+async function destroy(req, res) {
     const tableId = res.locals.tables.table_id;
-    const data= await service.destroy(tableId)
+
+    const data = await service.destroy(tableId)
+    console.log(data,"LLLLLLLLL")
     res.json({
         data
-        })
-    }
+    })
+}
 
 module.exports = {
     create: [
         asyncErrorBoundary(dataExists),
         asyncErrorBoundary(capacity),
-        asyncErrorBoundary(hasProperties([...requiredProperties])), 
-        asyncErrorBoundary(length), 
+        asyncErrorBoundary(hasProperties([...requiredProperties])),
+        asyncErrorBoundary(length),
         asyncErrorBoundary(create)
     ],
-        
+
     list: [
-        
+
         asyncErrorBoundary(list)
     ],
     read: [
         asyncErrorBoundary(tableExists),
         asyncErrorBoundary(read)
     ],
-    update:[
+    update: [
         notFound2,
-        asyncErrorBoundary(hasProperties([...requiredProperties2])),  
-        asyncErrorBoundary(hasReservationID),//set res.locals.reservation_id = reservation_id;
+        asyncErrorBoundary(hasProperties([...requiredProperties2])),
+        asyncErrorBoundary(hasReservationID),
         asyncErrorBoundary(reservationExist),
         asyncErrorBoundary(sufficientSeating),
-        asyncErrorBoundary(tableOccupied),
+        asyncErrorBoundary(tableNotOccupied),
         asyncErrorBoundary(update)
     ],
 
-    destroy:[
+    destroy: [
         asyncErrorBoundary(tableExists),
-        asyncErrorBoundary(tableOccupied),
-        asyncErrorBoundary(us5_notOccupied),
+        asyncErrorBoundary(tableNotOccupied),
         asyncErrorBoundary(finished),
-        asyncErrorBoundary(destroy)
     ]
 };

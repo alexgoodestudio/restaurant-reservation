@@ -2,15 +2,21 @@ const service = require("../tables/tables.service");
 
 async function tableExists(req, res, next) {
     const { table_id } = req.params;
-    const table = await service.read(table_id);
-    res.locals.table = table;
-    if (!table) {
+    const table = await service.read(Number(table_id));
+    console.log(table,"table")
+    // if(table === undefined){
+    //     console.log("ping")
+    // }
+    if(table !== undefined) {
+        res.locals.table = table;
+        next()
+    } else {
         next({
             message: `this table_id (${table_id}) does not exist`,
             status: 404,
         });
     }
-    next();
-  }
+}
 
-  module.exports= tableExists
+
+module.exports = tableExists
