@@ -16,12 +16,6 @@ function list(date = today()) {
         .then((data) => data[0]);
     }
 
-function destroy(reservationId){
-    return knex('reservations')
-    .where({reservation_id : reservationId})
-    .del();
-}
-
 function read(reservationId){
     return knex('reservations')
     .select("*")
@@ -35,7 +29,7 @@ function search(mobile_number){
 }
 
 function updateStatus(reservation){
-console.log("you are at the service function updatestatus")
+// console.log("you are at the service function updatestatus")
 return knex('reservations')
 .select("*")
 .where({reservation_id : reservation.reservation_id})
@@ -46,7 +40,6 @@ return knex('reservations')
 module.exports = {
     list,
     create,
-    destroy,
     read,
     search,
     updateStatus,

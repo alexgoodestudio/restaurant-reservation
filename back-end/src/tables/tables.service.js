@@ -19,6 +19,16 @@ function update(updatedData) {
     .update(updatedData)
 }
 
+function updateReservationStatus(reservationId, newStatus) {
+  return knex('reservations')
+    .where({ reservation_id: reservationId })
+    .update({ status: newStatus })
+    .catch((error) => {
+      // console.error(`Error updating reservation status: ${error.message}`);
+      throw error;
+    });
+}
+
 function create(data) {
   return knex('tables')
     .insert(data)
@@ -26,13 +36,13 @@ function create(data) {
     .then((rows) => rows[0]);
 }
 function destroy(tableId) {
-  console.log(tableId, "qqqqqqqaaaaaaaa")
+  // console.log(tableId, "qqqqqqqaaaaaaaa")
   return knex('tables')
     .where({ table_id: tableId })
     .del()
 }
 function finish(table) {
-  console.log("FINISH_SERVICE", table)
+  // console.log("FINISH_SERVICE", table)
   return knex.transaction(async (transaction) => {
     await knex('reservations')
     .where({reservation_id : table.reservation_id})
@@ -52,6 +62,7 @@ module.exports = {
   create,
   list,
   update,
+  updateReservationStatus,
   read,
   destroy,
   finish

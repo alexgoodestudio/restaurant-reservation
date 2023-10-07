@@ -187,7 +187,7 @@ describe("US-06 - Reservation status", () => {
         .put(`/tables/${tableTwo.table_id}/seat`)
         .set("Accept", "application/json")
         .send({ data: { reservation_id: reservationOne.reservation_id } });
-
+        console.log('Response Body:', secondSeatResponse.body);
       expect(secondSeatResponse.body.error).toContain("seated");
       expect(secondSeatResponse.status).toBe(400);
     });

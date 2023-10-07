@@ -7,10 +7,11 @@ const capacity = require("../errors/capacity");
 const dataExists = require("../errors/dataExists")
 const hasReservationID = require("../errors/hasReservationID");
 const tableNotOccupied = require("../errors/tableNotOccupied");
-const reservationExist = require("../errors/reservationExists")
-const sufficientSeating = require("../errors/sufficientSeating")
-const notFound2 = require("../errors/notFound2")
-const us4tableNotOccupied = require("../errors/us4tableNotOccupied")
+const reservationExist = require("../errors/reservationExists");
+const sufficientSeating = require("../errors/sufficientSeating");
+const notFound2 = require("../errors/notFound2");
+const us4tableNotOccupied = require("../errors/us4tableNotOccupied");
+const alreadySeated = require("../errors/alreadySeated");
 
 const requiredProperties = [
     "table_name",
@@ -22,7 +23,7 @@ const requiredProperties2 = [
 
 
 async function finished(req, res, next) {
-    console.log("FINISHEDDDDD!!!!")
+    // console.log("FINISHEDDDDD!!!!")
     const data = await service.finish(res.locals.table)
     res.json({
         data
@@ -47,10 +48,9 @@ async function read(req, res) {
     res.json({ data });
 }
 
-
 async function update(req, res) {
     const { table_id } = req.params;
-    const reservationId = res.locals.reservation_id
+    const reservationId = res.locals.reservation_id;
     const data = await service.read(table_id);
     const updatedData = {
         ...data,
@@ -58,9 +58,14 @@ async function update(req, res) {
         status: "occupied"
     };
 
-    await service.update(updatedData)
-    res.status(200).json({ data: updatedData })
+    await service.update(updatedData);
+    const updatedReservationStatus = await service.updateReservationStatus(reservationId, "seated");
+    // console.log(updatedReservationStatus, "+++++++++++")
+
+    res.status(200).json({ data: updatedData });
 }
+
+
 
 module.exports = {
     create: [
@@ -80,6 +85,7 @@ module.exports = {
         asyncErrorBoundary(read)
     ],
     update: [
+        asyncErrorBoundary(alreadySeated),
         notFound2,
         asyncErrorBoundary(hasProperties([...requiredProperties2])),
         asyncErrorBoundary(hasReservationID),
