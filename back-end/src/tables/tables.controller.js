@@ -11,6 +11,7 @@ const reservationExist = require("../errors/reservationExists")
 const sufficientSeating = require("../errors/sufficientSeating")
 const notFound2 = require("../errors/notFound2")
 const completed = require("../errors/completed")
+const us4tableNotOccupied = require("../errors/us4tableNotOccupied")
 
 const requiredProperties = [
     "table_name",
@@ -85,7 +86,7 @@ module.exports = {
         asyncErrorBoundary(hasReservationID),
         asyncErrorBoundary(reservationExist),
         asyncErrorBoundary(sufficientSeating),
-        asyncErrorBoundary(tableNotOccupied),
+        asyncErrorBoundary(us4tableNotOccupied),
         asyncErrorBoundary(update)
     ],
 
