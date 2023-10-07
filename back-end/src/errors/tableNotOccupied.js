@@ -5,11 +5,11 @@ async function tableNotOccupied(req, res, next){
     console.log(res.locals.table,"ressstableee");
 
     if(res.locals.table !== undefined){
-        const {reservation_id} = res.locals.table;
+        const reservation_id = res.locals.table.reservation_id;
         console.log(reservation_id,"^^^^^^^^^")
         const data = await service.read(table_id)
     
-        if(data.status !== "free" || reservation_id !== "occupied"){
+        if( res.locals.table.status !== "occupied"){
             next({
                 message: "not occupied",
                 status: 400,

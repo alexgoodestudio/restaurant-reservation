@@ -54,15 +54,13 @@ describe("US-05 - Finish an occupied table", () => {
         .put(`/tables/${tableOne.table_id}/seat`)
         .set("Accept", "application/json")
         .send({ data: { reservation_id: 1 } });
-        // console.log("Seat Response", seatResponse.body.error);
       expect(seatResponse.body.error).toBeUndefined();
       expect(seatResponse.status).toBe(200);
 
       const finishResponse = await request(app)
         .delete(`/tables/${tableOne.table_id}/seat`)
         .set("Accept", "application/json");
-        console.log("FINISH RESPONSE", finishResponse.body);
-
+        console.log(finishResponse.body.data,"FRFRFRFRFRFRFRFRFR")
       expect(finishResponse.body.error).toBeUndefined();
       expect(finishResponse.status).toBe(200);
     });

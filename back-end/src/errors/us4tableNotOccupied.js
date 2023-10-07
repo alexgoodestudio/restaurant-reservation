@@ -1,6 +1,6 @@
 const service = require("../tables/tables.service")
 
-async function tableOccupied(req, res, next){
+async function us4tableNotOccupied(req, res, next){
     const {table_id} = req.params
     const data = await service.read(table_id)
 
@@ -13,4 +13,4 @@ async function tableOccupied(req, res, next){
     next()
 }
 
-module.exports= tableOccupied;
+module.exports= us4tableNotOccupied;
