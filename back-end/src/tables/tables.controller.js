@@ -62,17 +62,6 @@ async function update(req, res) {
     res.status(200).json({ data: updatedData })
 }
 
-
-async function destroy(req, res) {
-    const tableId = res.locals.tables.table_id;
-
-    const data = await service.destroy(tableId)
-    console.log(data,"LLLLLLLLL")
-    res.json({
-        data
-    })
-}
-
 module.exports = {
     create: [
         asyncErrorBoundary(dataExists),
