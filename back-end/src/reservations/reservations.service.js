@@ -23,10 +23,11 @@ function read(reservationId){
     .first();
 }
 
-function search(mobile_number){
+function search(mobile_number) {
     return knex('reservations')
-    .select("*").where({mobile_number: mobile_number})
-}
+      .select("*")
+      .where('mobile_number', 'like', `%${mobile_number}%`);
+  }
 
 function updateStatus(reservation){
 // console.log("you are at the service function updatestatus")
