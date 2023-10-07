@@ -29,14 +29,12 @@ function search(mobile_number) {
       .where('mobile_number', 'like', `%${mobile_number}%`);
   }
 
-function updateStatus(reservation){
-// console.log("you are at the service function updatestatus")
-return knex('reservations')
-.select("*")
-.where({reservation_id : reservation.reservation_id})
-.update(reservation,"*")
-.then((data) => data[0])
-}
+  function updateStatus(reservation) {
+    return knex('reservations')
+      .where({ reservation_id: reservation.reservation_id })
+      .update(reservation, "*")
+      .then((updatedRecords) => updatedRecords[0]);
+  }
 
 module.exports = {
     list,

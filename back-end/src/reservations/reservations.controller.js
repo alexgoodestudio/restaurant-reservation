@@ -12,6 +12,7 @@ const reservationFinished = require("../errors/reservationFinished")
 const hasReservationID = require("../errors/hasReservationID");
 const reservationStatusErrors = require("../errors/reservationStatusErrors");
 const booked = require("../errors/booked");
+const cancelReservation = require("../errors/cancelReservation")
 
 const requiredProperties = [
   "first_name",
@@ -40,9 +41,9 @@ async function read(req, res) {
 async function update(req,res){
   const {reservation_id} = req.params;
   const body = await service.read(reservation_id);
-  const {status} = req.body.data;
-  const updatedData = {...body,status:status,first_name:first_name,last_name:last_name,mobile_number:mobile_number,people};
-  res.status(200).json({data:updatedData})  
+  const {status, first_name, last_name, mobile_number, people} = req.body.data;
+  const updatedData = {...body, status, first_name, last_name, mobile_number, people};
+  res.status(200).json({data:updatedData});  
 }
 
 async function list(req, res) {
@@ -58,26 +59,23 @@ async function list(req, res) {
 }
 
 async function create(req, res){
-  // console.log(req.body.data)
   const data = await service.create(req.body.data);
   res.status(201).json({data});
 }
 
 async function updateReservationStatus(req,res,){
-  console.log("I've made it to updateStatus function")
   const reservationId = req.params.reservation_id
   const data = await service.read(reservationId)
   const updatedObject = {...data,
       reservation_id : reservationId,
       status : req.body.data.status
   }
-    console.log(updatedObject,"Updated Object from updateStatus")
     const data2 = await service.updateStatus(updatedObject)
-    console.log("datttaaa2",data2)
     res.status(200).json({
       data: data2
     })
 }
+
 
 module.exports = {
   list:  asyncErrorBoundary(list),
@@ -104,8 +102,9 @@ module.exports = {
   ],
 
   updateReservationStatus:[
-      asyncErrorBoundary(reservationExists2),
-      asyncErrorBoundary(hasProperties2([...statusProperties])),
+    asyncErrorBoundary(reservationExists2),
+    asyncErrorBoundary(hasProperties2([...statusProperties])),
+    // cancelReservation,
       reservationFinished,
       asyncErrorBoundary(updateReservationStatus)
     ],

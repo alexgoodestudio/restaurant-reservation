@@ -7,7 +7,7 @@
  */
 
 function hasProperties2(statusProperties) {
-    // console.log("hasProperties");
+    console.log("hasProperties");
     return function (req, res, next) { 
       const {status} =req.body.data
       if(!statusProperties.includes(status)){

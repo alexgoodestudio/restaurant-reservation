@@ -21,7 +21,6 @@ const requiredProperties2 = [
     "reservation_id",
 ];
 
-
 async function finished(req, res, next) {
     // console.log("FINISHEDDDDD!!!!")
     const data = await service.finish(res.locals.table)
@@ -88,8 +87,8 @@ module.exports = {
         notFound2,
         asyncErrorBoundary(hasProperties([...requiredProperties2])),
         asyncErrorBoundary(hasReservationID),
-        asyncErrorBoundary(alreadySeated),
         asyncErrorBoundary(reservationExist),
+        asyncErrorBoundary(alreadySeated),
         asyncErrorBoundary(sufficientSeating),
         asyncErrorBoundary(us4tableNotOccupied),
         asyncErrorBoundary(update)
