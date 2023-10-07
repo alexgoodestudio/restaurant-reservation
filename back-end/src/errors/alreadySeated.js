@@ -1,9 +1,10 @@
 const service = require("../tables/tables.service");
 
 async function alreadySeated(req, res, next) {
-    const { table_id } = req.params;
-    const table = await service.read(table_id);
-    if (table.status === 'seated') {
+    const  reservation_id  = res.locals.reservation_id;
+    console.log(reservation_id,"YOWZA")
+    const reservation = await service.readReservations(reservation_id);
+    if (reservation.status === 'seated') {
         return next({
             status: 400,
             message: 'seated',

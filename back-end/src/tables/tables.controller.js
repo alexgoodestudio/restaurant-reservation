@@ -85,10 +85,10 @@ module.exports = {
         asyncErrorBoundary(read)
     ],
     update: [
-        asyncErrorBoundary(alreadySeated),
         notFound2,
         asyncErrorBoundary(hasProperties([...requiredProperties2])),
         asyncErrorBoundary(hasReservationID),
+        asyncErrorBoundary(alreadySeated),
         asyncErrorBoundary(reservationExist),
         asyncErrorBoundary(sufficientSeating),
         asyncErrorBoundary(us4tableNotOccupied),

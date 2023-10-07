@@ -6,6 +6,12 @@ function read(id) {
     .where({ table_id: id })
     .first()
 }
+function readReservations(id) {
+  return knex('reservations')
+    .select("*")
+    .where({ reservation_id: id })
+    .first()
+}
 
 function list() {
   return knex('tables')
@@ -64,6 +70,6 @@ module.exports = {
   update,
   updateReservationStatus,
   read,
-  destroy,
+  readReservations,
   finish
 };
