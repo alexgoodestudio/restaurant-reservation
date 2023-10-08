@@ -7,10 +7,13 @@
  */
 
 function hasProperties2(statusProperties) {
-    console.log("hasProperties");
+    console.log("hasProperties2");
     return function (req, res, next) { 
       const {status} =req.body.data
       if(!statusProperties.includes(status)){
+        console.log("Status:", status);
+console.log("Status Properties:", statusProperties);
+        console.log("hasProperties2 if statement");
         return next({
             status:400,
             message:"unknown"

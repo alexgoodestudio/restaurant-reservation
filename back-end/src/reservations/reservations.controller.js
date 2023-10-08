@@ -26,7 +26,8 @@ const requiredProperties = [
 const statusProperties=[
 "booked",
 "seated",
-"finished"
+"finished",
+"cancelled"
 ]
 
 async function read(req, res) {
@@ -102,9 +103,9 @@ module.exports = {
   ],
 
   updateReservationStatus:[
-    asyncErrorBoundary(reservationExists2),
-    asyncErrorBoundary(hasProperties2([...statusProperties])),
-    // cancelReservation,
+      asyncErrorBoundary(reservationExists2),
+      asyncErrorBoundary(hasProperties2([...statusProperties])),
+      cancelReservation,
       reservationFinished,
       asyncErrorBoundary(updateReservationStatus)
     ],
