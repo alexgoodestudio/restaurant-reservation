@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { listReservations, cancelReservation } from "../utils/api";
+import { listReservations,listTables, cancelReservation} from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import Reservations from "../components/Reservations";
-
+import Tables from "../components/Tables";
 
 
 /**
@@ -14,6 +14,7 @@ import Reservations from "../components/Reservations";
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
+  const [tables, setTables] = useState([]);
 
   useEffect(loadDashboard, [date]);
 
@@ -23,6 +24,8 @@ function Dashboard({ date }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
+    listTables()
+      .then(setTables)
     return () => abortController.abort();
   }
   function onCancel(reservation_id){
@@ -36,12 +39,9 @@ function Dashboard({ date }) {
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for date</h4>
       </div>
-     <div>
-     
-     </div>
       <ErrorAlert error={reservationsError} />
-      <Reservations reservations={reservations} onCancel={onCancel}/>
- 
+      <Reservations style={{ display: "inline-block" }} reservations = {reservations} onCancel={onCancel} />
+      <Tables style={{ display: "inline-block" }} tables = {tables}/>
     </main>
   );
 }

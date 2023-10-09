@@ -67,6 +67,34 @@ export async function listReservations(params, signal) {
     .then(formatReservationDate)
     .then(formatReservationTime);
 }
+//--------------------------------------------------------
+
+export async function listTables(params, signal) {
+  // Construct the URL for the API call
+  const url = new URL(`${API_BASE_URL}/tables`);
+
+  // Make the API call and handle the response
+  return await fetchJson(url, { headers, signal }, [])
+    .then(formatTableId)
+    .then(formatTableStatus);
+}
+
+// Optional: Functions to format table ID and status if needed
+function formatTableId(tables) {
+  return tables.map((table) => {
+    // Perform any formatting on table.id here
+    return table;
+  });
+}
+
+function formatTableStatus(tables) {
+  return tables.map((table) => {
+    // Perform any formatting on table.status here
+    return table;
+  });
+}
+
+//--------------------------------------------------------
 
 export async function cancelReservation(reservationId, signal){
   const url = `${API_BASE_URL}/reservations/${reservationId}/status`;
