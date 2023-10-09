@@ -30,7 +30,9 @@ function Dashboard({ date }) {
   }
   function onCancel(reservation_id){
     //come back and write API call to cancel Reservation 
-    cancelReservation(reservation_id).then(loadDashboard).catch(setReservationsError)
+  const abortController = new AbortController()
+  cancelReservation(reservation_id, abortController).then(loadDashboard)
+  return () => abortController.abort();
   }
 
   return (
@@ -39,9 +41,9 @@ function Dashboard({ date }) {
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for date</h4>
       </div>
-      <ErrorAlert error={reservationsError} />
-      <Reservations style={{ display: "inline-block" }} reservations = {reservations} onCancel={onCancel} />
-      <Tables style={{ display: "inline-block" }} tables = {tables}/>
+      <ErrorAlert error={reservationsError} className= "d-inline" />
+      <Reservations  reservations = {reservations} onCancel={onCancel} className= "d-inline" />
+      <Tables  tables = {tables}/>
     </main>
   );
 }
