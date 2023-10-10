@@ -42,6 +42,10 @@ function ReservationForm() {
     }
   }
 
+  function cancelAndReturn(){
+    history.goBack()
+  }
+
   //The /reservations/new page will display an error message with className="alert alert-danger"
 
   return (
@@ -57,7 +61,7 @@ function ReservationForm() {
         <input className="form-control" type="number" onChange={handleChange} id="people" value={formData.people} name="people" placeholder="Number of Guests?" />
 
         <button type="submit" className="btn btn-primary mt-2" >Save</button>
-        <button className="btn btn-secondary mt-2" >Cancel</button>
+        <button className="btn btn-secondary mt-2" onClick={cancelAndReturn} >Cancel</button>
       </form>
     </div>
 

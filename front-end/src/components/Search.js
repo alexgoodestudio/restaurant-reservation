@@ -18,12 +18,12 @@ function Search() {
   return (
     <>
       <form className="m-5 w-50">
-        <h4>Search for Reservation</h4>
+        <h4>Find Reservation</h4>
         <input
           className="form-control"
           type="text"
           id="search"
-          placeholder="search"
+          placeholder="Search"
           name="search"
         />
         <button
