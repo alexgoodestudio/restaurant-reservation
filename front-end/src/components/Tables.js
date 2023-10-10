@@ -5,22 +5,22 @@ function Tables({tables =[]}) {
     const list = tables.length ? (
         tables.map((table) => {
             return(
-                <div key={table.table_id}  >
-                    <ol className= "d-inline">Table ID: {table.table_id}</ol>
-                    <ol className= "d-inline">Table Status: {table.status}</ol>
-                    {/* <ol> Reservation ID{table.reservation_id}</ol> */}
+                <div key={table.table_id}>
+                    <ol className="d-inline">Table ID: {table.table_id}</ol>
+                    <ol className="d-inline" data-table-id-status={table.table_id}>Table Status: {table.status}</ol>
+                    
                 </div>
             )
         })
     ) : (
         "No Tables"
-    )
+    );
 
-  return(
+  return (
         <>
             {list}
         </>
-  )
+  );
 }
 
-export default Tables
+export default Tables;

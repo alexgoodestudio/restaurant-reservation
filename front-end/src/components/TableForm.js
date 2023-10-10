@@ -3,12 +3,10 @@ import React, { useState } from "react";
 import { createTable } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 
-
-
 function TableForm(){
     const history = useHistory();
     const [error, setError] = useState(null);
-    const [formData, setFormData] = useState({
+    const [tableForm, setTableForm] = useState({
       table_name: "",
       capacity: Number(""),
     });
@@ -19,13 +17,13 @@ function TableForm(){
 
       function handleChange(event) {
         if(event.target.name === "capacity"){
-          setFormData({
-            ...formData,
+          setTableForm({
+            ...tableForm,
             [event.target.name]: Number(event.target.value)
           })
         }else{
-          setFormData({
-            ...formData,
+          setTableForm({
+            ...tableForm,
             [event.target.name]: event.target.value
         
         })
@@ -34,10 +32,10 @@ function TableForm(){
       const handleSubmit = async (event) => {
         event.preventDefault()
         const abortController = new AbortController()
-        console.log("FormData", formData)
+        console.log("tableForm", tableForm)
         try {
-          await createTable(formData, abortController.signal)
-          history.push(`/dashboard?date=${formData.reservation_date}`)
+          await createTable(tableForm, abortController.signal)
+          history.goBack()
         } catch(error) {
           setError(error)
         }

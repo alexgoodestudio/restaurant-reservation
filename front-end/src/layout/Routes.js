@@ -31,11 +31,9 @@ function Routes() {
       <Route exact path="/search">
         <Search />
       </Route>
-
       <Route exact path="/tables/new">
         <TableForm />
       </Route>
-
       <Route>
         <NotFound />
       </Route>

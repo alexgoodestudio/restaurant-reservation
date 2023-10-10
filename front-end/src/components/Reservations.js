@@ -3,18 +3,18 @@ import { Link } from "react-router-dom";
 
 function Reservations({ onCancel, reservations = [] }) {
 
-  // function cancelHandler({
-  //   target: { dataset: { reservationIdCancel } } = {},
-  // }) {
-  //   if (
-  //     reservationIdCancel &&
-  //     window.confirm(
-  //       "Do you want to cancel this reservation? This cannot be undone."
-  //     )
-  //   ) {
-  //     onCancel(reservationIdCancel);
-  //   }
-  // }
+  function cancelHandler({
+    target: { dataset: { reservationIdCancel } } = {},
+  }) {
+    if (
+      reservationIdCancel &&
+      window.confirm(
+        "Do you want to cancel this reservation? This cannot be undone."
+      )
+    ) {
+      onCancel(reservationIdCancel);
+    }
+  }
   //-------------------------------------------------------------------------------------------
   //inside ternary
   const rows = reservations.length ? (
@@ -33,7 +33,7 @@ function Reservations({ onCancel, reservations = [] }) {
             <div className="col-sm-1">
               <Link className="btn btn-outline-primary m-1" to={`/reservations/${reservation.reservation_id}/seat`} >seat</Link>
               <Link className="btn btn-outline-secondary m-1" to={`/reservations/${reservation.reservation_id}/edit`} >edit</Link>
-              <Link className="btn btn-outline-danger m-1" to={`/reservations/${reservation.reservation_id}/cancel`} >cancel</Link>
+              <Link className="btn btn-outline-danger m-1" cancelHandler={cancelHandler} to={`/reservations/${reservation.reservation_id}/cancel`} >cancel</Link>
             </div>
           ) : ("")}
         </div>
