@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { listReservations,listTables, cancelReservation} from "../utils/api";
+import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import Reservations from "../components/Reservations";
 import Tables from "../components/Tables";
@@ -28,22 +28,17 @@ function Dashboard({ date }) {
       .then(setTables)
     return () => abortController.abort();
   }
-  function onCancel(reservation_id){
-    //come back and write API call to cancel Reservation 
-  const abortController = new AbortController()
-  cancelReservation(reservation_id, abortController).then(loadDashboard)
-  return () => abortController.abort();
-  }
-
   return (
     <main>
-      <h1>Dashboard</h1>
+      <h1>Reservations</h1>
       <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date</h4>
+        <h4 className="mb-0">Today:</h4>
       </div>
-      <ErrorAlert error={reservationsError} className= "d-inline" />
-      <Reservations  reservations = {reservations} onCancel={onCancel} className= "d-inline" />
-      <Tables  tables = {tables}/>
+        <ErrorAlert error={reservationsError} className="d-inline" />
+          <div className="d-flex flex-row bd-highlight mb-3">
+        <Reservations setError={setReservationsError} reservations={reservations} className="d-inline" />
+        <Tables tables={tables} />
+      </div>
     </main>
   );
 }

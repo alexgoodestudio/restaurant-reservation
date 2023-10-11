@@ -8,22 +8,22 @@
 
 
 function hasProperties(requiredProperties) {
-  // console.log("hasProperties");
+  console.log("hasProperties");
   return function (req, res, next) { 
     const { data = {} } = req.body; 
     
-    // console.log("HASPROPERTIESDATA",data)
+    console.log("HASPROPERTIESDATA",data)
     try {
       requiredProperties.forEach((property) => {
         const value = data[property];
         if (!value) {
           const error = new Error(`A '${property}' property is required.`);
           error.status = 400;
-          // console.log("hasProperties Error1 completed")
+          console.log("hasProperties Error1 completed")
           throw error;
         }
       });
-      // console.log("hasProperties Next completed")
+      console.log("hasProperties Next completed")
       next();
     } catch (error) {
       // console.log("hasProperties Error2 completed",error)

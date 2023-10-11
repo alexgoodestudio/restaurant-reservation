@@ -6,11 +6,12 @@ import { today } from "../utils/date-time";
 import Search from "../components/Search";
 import NewForm from "../components/NewForm";
 import EditForm from "../components/EditForm";
-import useQuery from "../utils/useQuery"
+import useQuery from "../utils/useQuery";
 import TableForm from "../components/TableForm";
+import SeatPage from "../components/SeatPage";
 
 function Routes() {
-  const query = useQuery()
+  const query = useQuery();
   return (
     <Switch>
       <Route exact path="/">
@@ -34,7 +35,10 @@ function Routes() {
       <Route exact path="/tables/new">
         <TableForm />
       </Route>
-      <Route>
+      <Route exact path="/reservations/:reservation_id/seat">
+        <SeatPage />
+      </Route>
+      <Route path="*">
         <NotFound />
       </Route>
     </Switch>

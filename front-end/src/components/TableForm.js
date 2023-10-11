@@ -35,7 +35,7 @@ function TableForm(){
         console.log("tableForm", tableForm)
         try {
           await createTable(tableForm, abortController.signal)
-          history.goBack()
+          history.push("/")
         } catch(error) {
           setError(error)
         }

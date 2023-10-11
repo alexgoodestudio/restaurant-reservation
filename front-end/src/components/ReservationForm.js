@@ -3,18 +3,10 @@ import { createReservation } from "../utils/api";
 import { useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 
-function ReservationForm() {
+function ReservationForm({title, keyValues}) {
   const history = useHistory();
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    mobile_number: "",
-    reservation_date: "",
-    reservation_time: "",
-    people: Number(""),
-  });
-
+  const [formData, setFormData] = useState(keyValues);
 
   function handleChange(event) {
     if(event.target.name === "people"){
@@ -33,7 +25,6 @@ function ReservationForm() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     const abortController = new AbortController()
-    console.log("FormData", formData)
     try {
       await createReservation(formData, abortController.signal)
       history.push(`/dashboard?date=${formData.reservation_date}`)
@@ -52,7 +43,7 @@ function ReservationForm() {
     <div>
       <ErrorAlert error={error}/>
       <form className="m-4 w-50" onSubmit={handleSubmit}>
-        <h3>New Reservation</h3>
+        <h3>{title}</h3>
         <input className="form-control" type="text" onChange={handleChange} id="firstName" value={formData.first_name} name="first_name" placeholder="First Name" />
         <input className="form-control" type="text" onChange={handleChange} id="lastName" value={formData.last_name} name="last_name" placeholder="Last Name" />
         <input className="form-control" type="text" onChange={handleChange} id="mobileNumber" value={formData.mobile_number} name="mobile_number" placeholder="Mobile Number" />

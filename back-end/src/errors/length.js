@@ -1,6 +1,6 @@
 function length(req, res, next) {
   const { table_name } = req.body.data;
-
+console.log("length function")
   if (table_name.length < 2) {
     return next({
       status: 400,

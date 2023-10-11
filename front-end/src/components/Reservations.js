@@ -1,39 +1,47 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { cancelReservation } from "../utils/api";
 
-function Reservations({ onCancel, reservations = [] }) {
+function Reservations({ setError, reservations = [] }) {
+  const history = useHistory();
 
-  function cancelHandler({
-    target: { dataset: { reservationIdCancel } } = {},
-  }) {
-    if (
-      reservationIdCancel &&
-      window.confirm(
-        "Do you want to cancel this reservation? This cannot be undone."
-      )
-    ) {
-      onCancel(reservationIdCancel);
+  const onCancel = async (reservation_id) => {
+    const abortController = new AbortController();
+    const finish = window.confirm(
+      "Do you want to cancel this reservation? This cannot be undone."
+    );
+    if (finish) {
+      try {
+        setError(null);
+        await cancelReservation(reservation_id, abortController.signal);
+        history.go(0);
+      } catch (error) {
+        setError(error);
+      }
     }
-  }
+  };
   //-------------------------------------------------------------------------------------------
   //inside ternary
   const rows = reservations.length ? (
     reservations.map((reservation) => {
       return (
 
-        <div className="form-group row "  key={reservation.reservation_id}>
-          <div className="col-xl-1">Reservation ID:{reservation.reservation_id}</div>
-          <div className="col-xl-1">{reservation.first_name}, {reservation.last_name}</div>
-          <div className="col-xl-1">{reservation.mobile_number}</div>
-          <div className="col-xl-1">{reservation.reservation_date}</div>
-          <div className="col-xl-1">{reservation.reservation_time}</div>
-          <div className="col-xl-1">{reservation.people}</div>
-          <div className="col-xl-1" data-reservation-id-status={reservation.reservation_id}>{reservation.status}</div>
+        <div className="form-group row m-3" key={reservation.reservation_id}>
+          <div className="col">Reservation ID:{reservation.reservation_id}</div>
+          <div className="col">{reservation.first_name}, {reservation.last_name}</div>
+          <div className="col">{reservation.mobile_number}</div>
+          <div className="col">{reservation.reservation_date}</div>
+          <div className="col">{reservation.reservation_time}</div>
+          <div className="col">{reservation.people}</div>
+          <div className="col" data-reservation-id-status={reservation.reservation_id}>{reservation.status}</div>
           {reservation.status === "booked" ? (
-            <div className="col-sm-1">
+            <div className="">
               <Link className="btn btn-outline-primary m-1" to={`/reservations/${reservation.reservation_id}/seat`} >seat</Link>
-              <Link className="btn btn-outline-secondary m-1" to={`/reservations/${reservation.reservation_id}/edit`} >edit</Link>
-              <Link className="btn btn-outline-danger m-1" cancelHandler={cancelHandler} to={`/reservations/${reservation.reservation_id}/cancel`} >cancel</Link>
+              <Link className="btn btn-outline-secondary m-1" to={{
+                pathname: `/reservations/${reservation.reservation_id}/edit`,
+                state: reservation
+              }} >edit</Link>
+              <button className="btn btn-outline-danger m-3" data-reservation-id-cancel={reservation.reservation_id} onClick={() => onCancel(reservation.reservation_id)}>cancel</button>
             </div>
           ) : ("")}
         </div>
@@ -49,7 +57,6 @@ function Reservations({ onCancel, reservations = [] }) {
   return (
     <div className="table">
       {rows}
-
     </div>
   )
 }

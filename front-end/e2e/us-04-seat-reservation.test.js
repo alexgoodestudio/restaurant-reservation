@@ -5,6 +5,7 @@ const fsPromises = fs.promises;
 
 const { createReservation } = require("./api");
 const { selectOptionByText } = require("./utils");
+const { log } = require("console");
 
 const baseURL = process.env.BASE_URL || "http://localhost:3000";
 
@@ -40,22 +41,23 @@ describe("US-04 - Seat reservation - E2E", () => {
 
       await page.type("input[name=table_name]", tableName);
       await page.type("input[name=capacity]", "6");
-
+console.log("pre submit")
       await page.screenshot({
         path: ".screenshots/us-04-create-table-submit-before.png",
         fullPage: true,
       });
-
+console.log("before submit")
       await Promise.all([
         page.click("button[type=submit]"),
         page.waitForNavigation({ waitUntil: "networkidle0" }),
       ]);
+console.log("afer submit")
 
       await page.screenshot({
         path: ".screenshots/us-04-create-table-submit-after.png",
         fullPage: true,
       });
-
+console.log("after screenshot")
       await expect(page).toMatch(tableName);
     });
     test("omitting table_name and submitting does not create a new table", async () => {
