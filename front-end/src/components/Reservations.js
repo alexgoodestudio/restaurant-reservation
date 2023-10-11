@@ -20,45 +20,56 @@ function Reservations({ setError, reservations = [] }) {
       }
     }
   };
-  //-------------------------------------------------------------------------------------------
-  //inside ternary
+
   const rows = reservations.length ? (
-    reservations.map((reservation) => {
-      return (
-
-        <div className="form-group row m-3" key={reservation.reservation_id}>
-          <div className="col">Reservation ID:{reservation.reservation_id}</div>
-          <div className="col">{reservation.first_name}, {reservation.last_name}</div>
-          <div className="col">{reservation.mobile_number}</div>
-          <div className="col">{reservation.reservation_date}</div>
-          <div className="col">{reservation.reservation_time}</div>
-          <div className="col">{reservation.people}</div>
-          <div className="col" data-reservation-id-status={reservation.reservation_id}>{reservation.status}</div>
-          {reservation.status === "booked" ? (
-            <div className="">
-              <Link className="btn btn-outline-primary m-1" to={`/reservations/${reservation.reservation_id}/seat`} >seat</Link>
-              <Link className="btn btn-outline-secondary m-1" to={{
-                pathname: `/reservations/${reservation.reservation_id}/edit`,
-                state: reservation
-              }} >edit</Link>
-              <button className="btn btn-outline-danger m-3" data-reservation-id-cancel={reservation.reservation_id} onClick={() => onCancel(reservation.reservation_id)}>cancel</button>
-            </div>
-          ) : ("")}
-        </div>
-
-      );
-    })
+    <table className="table">
+      <thead>
+        <tr>
+          <th>Reservation ID</th>
+          <th>Name</th>
+          <th>Mobile Number</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>People</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {reservations.map((reservation) => (
+          <tr key={reservation.reservation_id}>
+            <td>{reservation.reservation_id}</td>
+            <td>{reservation.first_name}, {reservation.last_name}</td>
+            <td>{reservation.mobile_number}</td>
+            <td>{reservation.reservation_date}</td>
+            <td>{reservation.reservation_time}</td>
+            <td>{reservation.people}</td>
+            <td data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
+            <td>
+              {reservation.status === "booked" ? (
+                <>
+                  <Link className="btn btn-outline-primary m-1" to={`/reservations/${reservation.reservation_id}/seat`}>Seat</Link>
+                  <Link className="btn btn-outline-secondary m-1" to={{
+                    pathname: `/reservations/${reservation.reservation_id}/edit`,
+                    state: reservation
+                  }}>Edit</Link>
+                  <button className="btn btn-outline-danger m-1" data-reservation-id-cancel={reservation.reservation_id} onClick={() => onCancel(reservation.reservation_id)}>Cancel</button>
+                </>
+              ) : ("")}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   ) : (
     <div>No reservations found</div>
   );
-  //-------------------------------------------------------------------------------------------
-
 
   return (
     <div className="table">
       {rows}
     </div>
-  )
+  );
 }
 
 export default Reservations;

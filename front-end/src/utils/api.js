@@ -135,14 +135,31 @@ export async function createTable(table, signal) {
 }
 
 
-export async function seatedReservation(table_id, signal) {
+export async function seatReservationStatus(table_id,reservation_id, signal) {
+  console.log("tableID:", table_id,"RES",reservation_id );
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
   const options = {
     method: "PUT",
     headers,
     body: JSON.stringify({
       data: {
-        status: "seated",
+        reservation_id
+        // status: "seated",
+      },
+    }),
+    signal,
+  };
+  return await fetchJson(url, options, {});
+}
+
+export async function finishTableStatus(table_id, signal) {
+  const url = `${API_BASE_URL}/tables/${table_id}`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({
+      data: {
+        status: "free",
       },
     }),
     signal,

@@ -36,7 +36,7 @@ function Dashboard({ date }) {
       </div>
         <ErrorAlert error={reservationsError} className="d-inline" />
           <div className="d-flex flex-row bd-highlight mb-3">
-        <Reservations setError={setReservationsError} reservations={reservations} className="d-inline" />
+        <Reservations setError={setReservationsError} reservations={reservations} className="d-inline w-50" />
         <Tables tables={tables} />
       </div>
     </main>

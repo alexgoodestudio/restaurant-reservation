@@ -6,6 +6,7 @@ function read(id) {
     .where({ table_id: id })
     .first()
 }
+
 function readReservations(id) {
   return knex('reservations')
     .select("*")
@@ -18,6 +19,7 @@ function list() {
     .select("*")
     .orderBy('table_name', 'asc')
 }
+
 function update(updatedData) {
   return knex('tables')
     .select("*")

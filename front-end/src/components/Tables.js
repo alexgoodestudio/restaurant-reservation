@@ -1,25 +1,65 @@
-import React from "react";
+import { useState } from "react";
+import { finishTableStatus } from "../utils/api";
+
 
 function Tables({ tables = [] }) {
-    const list = tables.length
-        ? tables.map((table) => {
-            return (
-                <div>
-                    <div key={table.table_id} className="bg bg-light p-">
-                        <div className="form-group row"></div>
-                        <ol className="d-inline-block">Table ID: {table.table_id}</ol>
-                        <ol className="d-inline-block">Table Name: {table.table_name}</ol>
-                        <ol className="d-inline-block" data-table-id-status={table.table_id}>Table Status: {table.status}</ol>
-                       
-                        {table.status ==="occupied" ?  (<ol><button className="btn btn-primary d-inline">Finish</button></ol>): ""}
+    
+    const [isButtonVisible, setIsButtonVisible] = useState(true); 
+    
+    function clickHandler(){
+        setIsButtonVisible(false)
+       const finish = window.confirm("Is this table ready to seat new guests? This cannot be undone."); 
+        if(finish){
+            
+        }
+    }
 
-                        {/* onClick Finish button dissapears | updates Tables status to free | updates Reservations status to seated */}
-                    </div>
-                </div>
-            );
-        })
-        : "No Tables";
-    return <>{list}</>;
-}
+    function handleSubmit(){
 
-export default Tables;
+    }
+
+    const list = tables.length ? (
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Table ID</th>
+              <th>Table Name</th>
+              <th>Table Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tables.map((table) => (
+              <tr key={table.table_id}>
+                <td>{table.table_id}</td>
+                <td>{table.table_name}</td>
+                <td data-table-id-status={table.table_id}>{table.status}</td>
+                <td>
+                  {table.status === "occupied" && isButtonVisible ? (
+                    <button
+                      onClick={clickHandler}
+                      className="btn btn-primary"
+                      data-table-id-finish={table.table_id}
+                    >
+                      Finish
+                    </button>
+                  ) : (
+                    ""
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        "No Tables"
+      );
+    
+      return (
+        <form onSubmit={handleSubmit}>
+          {list}
+        </form>
+      );
+    }
+    
+    export default Tables;

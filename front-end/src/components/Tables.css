@@ -1,0 +1,9 @@
+.container {
+   
+   
+    
+    row-gap: 10px;
+    column-gap: 20px;
+    border: 1px solid;
+    width: 200px;
+  }
