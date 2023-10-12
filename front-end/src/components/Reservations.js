@@ -36,7 +36,7 @@ function Reservations({ setError, reservations = [] }) {
         </tr>
       </thead>
       <tbody>
-        {reservations.map((reservation) => (
+        {reservations.filter(reservation => reservation.status !== "cancelled").map((reservation) => (
           <tr key={reservation.reservation_id}>
             <td>{reservation.reservation_id}</td>
             <td>{reservation.first_name}, {reservation.last_name}</td>
@@ -46,7 +46,7 @@ function Reservations({ setError, reservations = [] }) {
             <td>{reservation.people}</td>
             <td data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
             <td>
-              {reservation.status === "booked" ? (
+              {reservation.status === "booked" && (
                 <>
                   <Link className="btn btn-outline-primary m-1" to={`/reservations/${reservation.reservation_id}/seat`}>Seat</Link>
                   <Link className="btn btn-outline-secondary m-1" to={{
@@ -55,7 +55,7 @@ function Reservations({ setError, reservations = [] }) {
                   }}>Edit</Link>
                   <button className="btn btn-outline-danger m-1" data-reservation-id-cancel={reservation.reservation_id} onClick={() => onCancel(reservation.reservation_id)}>Cancel</button>
                 </>
-              ) : ("")}
+              )}
             </td>
           </tr>
         ))}

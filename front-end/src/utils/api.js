@@ -111,7 +111,6 @@ export async function cancelReservation(reservationId, signal) {
 
 //check function name
 export async function createReservation(reservation, signal) {
-  console.log("Reservation.people", typeof reservation.people);
   const url = `${API_BASE_URL}/reservations/`;
   const options = {
     method: "POST",
@@ -136,7 +135,7 @@ export async function createTable(table, signal) {
 
 
 export async function seatReservationStatus(table_id,reservation_id, signal) {
-  console.log("tableID:", table_id,"RES",reservation_id );
+  // console.log("tableID:", table_id,"RES",reservation_id );
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
   const options = {
     method: "PUT",
@@ -144,7 +143,6 @@ export async function seatReservationStatus(table_id,reservation_id, signal) {
     body: JSON.stringify({
       data: {
         reservation_id
-        // status: "seated",
       },
     }),
     signal,
@@ -166,3 +164,15 @@ export async function finishTableStatus(table_id, signal) {
   };
   return await fetchJson(url, options, {});
 }
+
+
+// export async function updateReservation(reservationId, updatedData, signal) {
+//   const url = `${API_BASE_URL}/reservations/${reservationId}`;
+//   const options = {
+//     method: "PUT",
+//     headers,
+//     body: JSON.stringify({ data: updatedData }),
+//     signal,
+//   };
+//   return await fetchJson(url, options);
+// }

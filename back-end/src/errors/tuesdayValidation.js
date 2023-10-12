@@ -9,7 +9,7 @@ function tuesdayValidation(req,res,next){
 
     if(isNaN(numeralDay)){
       next({
-        message:`reservation_date/ reservation_time is not a number or incorrect`,
+        message:`reservation_date/ reservation_time is not a number`,
         status: 400,
       })
     }
