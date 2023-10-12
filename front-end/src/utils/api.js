@@ -111,7 +111,8 @@ export async function cancelReservation(reservationId, signal) {
 
 //check function name
 export async function createReservation(reservation, signal) {
-  const url = `${API_BASE_URL}/reservations/`;
+  console.log("CREATE RESERVATION CALLED",reservation);
+  const url = `${API_BASE_URL}/reservations`;
   const options = {
     method: "POST",
     headers,
@@ -166,15 +167,18 @@ export async function finishTableStatus(table_id, signal) {
 }
 
 
-export async function updateReservation(reservationId, updatedData, signal) {
-  const url = `${API_BASE_URL}/reservations/${reservationId}`;
+export async function updateReservation(formData, signal) {
+  const {reservation_id} = formData
+  console.log("formData1234", formData);
+  console.log("RESERVATION ID IN API",typeof reservation_id);
+  const url = `${API_BASE_URL}/reservations/${reservation_id}`;
   const options = {
     method: "PUT",
+    body: JSON.stringify({ data: {...formData} }),
     headers,
-    body: JSON.stringify({ data: updatedData }),
     signal,
   };
-  return await fetchJson(url, options);
+  return await fetchJson(url, options, formData);
 }
 
 

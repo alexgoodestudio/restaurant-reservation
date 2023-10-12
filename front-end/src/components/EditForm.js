@@ -6,7 +6,6 @@ function EditForm() {
   const title = "Edit Reservation";
   const location = useLocation();
   const reservation = location.state;
-  
 
   console.log(reservation,"12345");
   console.log(typeof reservation.reservation_date, reservation.reservation_date)
