@@ -25,12 +25,12 @@ function SeatPage() {
     function changeHandler({ target: { value } }) {
         setTableID(value)
 
-
     }
     async function submitHandler(event) {
         event.preventDefault();
         const abortController = new AbortController();
-        seatReservationStatus(reservation_id, tableID,abortController.signal)
+        console.log(tableID,"TID")
+        seatReservationStatus(tableID, reservation_id,abortController.signal)
             .then(() => history.push("/dashboard"))
             .catch(setError);
     }

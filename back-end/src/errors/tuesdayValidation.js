@@ -1,32 +1,37 @@
-function tuesdayValidation(req,res,next){
+function tuesdayValidation(req, res, next) {
   const { reservation_date, reservation_time } = req.body.data;
-  const reservationDate = new Date(
-    `${reservation_date}T${reservation_time}:00Z`
-  );
+
+  const reservationDate = new Date(`${reservation_date}T${reservation_time}:00Z`);
   res.locals.time = reservationDate;
+
   const today = new Date();
-  const numeralDay = reservationDate.getDay()
+  today.setHours(0, 0, 0, 0);
 
-  if(isNaN(numeralDay)){
-    next({
-      message:`reservation_date/ reservation_time is not a number`,
+  const numeralDay = reservationDate.getDay();
+
+  if (isNaN(numeralDay)) {
+    return next({
+      message: `reservation_date/ reservation_time is not a number`,
       status: 400,
-    })
+    });
   }
 
-  if(numeralDay === 2){
-    next({
-      message:`closed`,
+  
+
+  if (numeralDay === 2) {
+    return next({
+      message: `The reservation date is a Tuesday as the restaurant is closed on Tuesdays`,
       status: 400,
-    })
-    // return res.status(400).send("we are closed");
+    });
   }
-  if(reservationDate < today){
-    next({
-      message:`future`,
+
+  if (reservationDate < today) {
+    return next({
+      message: `The reservation date is in the past. Only future reservations are allowed`,
       status: 400,
-    })
+    });
   }
+
   next();
 }
 

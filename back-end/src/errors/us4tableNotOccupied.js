@@ -6,7 +6,7 @@ async function us4tableNotOccupied(req, res, next){
 
     if(data.status !== "free"){
         next({
-            message: "not occupied",
+            message: "occupied",
             status: 400,
         });
     }

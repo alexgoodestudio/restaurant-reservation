@@ -136,7 +136,7 @@ export async function createTable(table, signal) {
 
 
 export async function seatReservationStatus(table_id,reservation_id, signal) {
-  // console.log("tableID:", table_id,"RES",reservation_id );
+  console.log("tableID:", table_id,"RES",reservation_id );
   const url = `${API_BASE_URL}/tables/${table_id}/seat`;
   const options = {
     method: "PUT",
@@ -167,19 +167,19 @@ export async function finishTableStatus(table_id, signal) {
 }
 
 
-export async function updateReservation(formData, signal) {
-  const {reservation_id} = formData
-  console.log("formData1234", formData);
-  console.log("RESERVATION ID IN API",typeof reservation_id);
-  const url = `${API_BASE_URL}/reservations/${reservation_id}`;
+export async function updateReservation(params, formData, signal) {
+  const url = `${API_BASE_URL}/reservations/${params}`;
+  console.log("update res before")
   const options = {
     method: "PUT",
-    body: JSON.stringify({ data: {...formData} }),
     headers,
+    body: JSON.stringify({ data: formData }),
     signal,
   };
-  return await fetchJson(url, options, formData);
+  
+  return await fetchJson(url, options);
 }
+
 
 
 // export async function readReservation(reservationId, signal) {
