@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { createReservation } from "../utils/api";
+import { updateReservation, createReservation } from "../utils/api";
 import { useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 
-function ReservationForm({ title, keyValues }) {
+function ReservationForm({ title, keyValues, isEdit }) {
   const history = useHistory();
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState(keyValues);
-
+  console.log(formData,"reservations form data")
   function handleChange(event) {
     if (event.target.name === "people") {
       setFormData({
@@ -22,13 +22,18 @@ function ReservationForm({ title, keyValues }) {
       })
     }
   }
-  
+  console.log(formData);
   const handleSubmit = async (event) => {
     event.preventDefault()
     const abortController = new AbortController()
     try {
+      if(!isEdit){
       await createReservation(formData, abortController.signal)
       history.push(`/dashboard?date=${formData.reservation_date}`)
+    }else{
+      await updateReservation(formData.reservation_id,formData, abortController.signal)
+      history.push(`/dashboard?date=${formData.reservation_date}`)
+    }
     } catch(error) {
       setError(error)
     }

@@ -166,13 +166,19 @@ export async function finishTableStatus(table_id, signal) {
 }
 
 
-// export async function updateReservation(reservationId, updatedData, signal) {
+export async function updateReservation(reservationId, updatedData, signal) {
+  const url = `${API_BASE_URL}/reservations/${reservationId}`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ data: updatedData }),
+    signal,
+  };
+  return await fetchJson(url, options);
+}
+
+
+// export async function readReservation(reservationId, signal) {
 //   const url = `${API_BASE_URL}/reservations/${reservationId}`;
-//   const options = {
-//     method: "PUT",
-//     headers,
-//     body: JSON.stringify({ data: updatedData }),
-//     signal,
-//   };
-//   return await fetchJson(url, options);
+//   return await fetchJson(url, { headers, signal }, {});
 // }

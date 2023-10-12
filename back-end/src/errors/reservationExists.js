@@ -2,7 +2,7 @@ const service = require("../reservations/reservations.service");
 
 async function reservationExists(req, res, next) {
     const reservation_id = res.locals.reservation_id;
-    console.log("RES_ID",reservation_id)
+    // console.log("RES_ID",reservation_id)
     const reservation = await service.read(reservation_id );
     res.locals.reservation = reservation;
     if (!reservation) {

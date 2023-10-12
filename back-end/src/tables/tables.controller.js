@@ -30,9 +30,7 @@ async function finished(req, res, next) {
 }
 
 async function create(req, res) {
-    console.log("create function")
     const data = await service.create(req.body.data)
-    console.log("create data");
     res.status(201).json({ data })
 }
 

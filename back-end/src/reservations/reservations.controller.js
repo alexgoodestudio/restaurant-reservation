@@ -42,8 +42,8 @@ async function read(req, res) {
 async function update(req,res){
   const {reservation_id} = req.params;
   const body = await service.read(reservation_id);
-  const {status, first_name, last_name, mobile_number, people} = req.body.data;
-  const updatedData = {...body, status, first_name, last_name, mobile_number, people};
+  const {status, first_name, last_name, mobile_number, people,reservation_date,reservation_time} = req.body.data;
+  const updatedData = {...body, status, first_name, last_name, mobile_number, people,reservation_date,reservation_time};
   res.status(200).json({data:updatedData});  
 }
 
