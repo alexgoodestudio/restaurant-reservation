@@ -36,40 +36,57 @@ function Reservations({ setError, reservations = [] }) {
         </tr>
       </thead>
       <tbody>
-        {reservations.filter(reservation => reservation.status !== "cancelled").map((reservation) => (
-          <tr key={reservation.reservation_id}>
-            <td>{reservation.reservation_id}</td>
-            <td>{reservation.first_name}, {reservation.last_name}</td>
-            <td>{reservation.mobile_number}</td>
-            <td>{reservation.reservation_date}</td>
-            <td>{reservation.reservation_time}</td>
-            <td>{reservation.people}</td>
-            <td data-reservation-id-status={reservation.reservation_id}>{reservation.status}</td>
-            <td>
-              {reservation.status === "booked" && (
-                <>
-                  <Link className="btn btn-outline-primary m-1" to={`/reservations/${reservation.reservation_id}/seat`}>Seat</Link>
-                  <Link className="btn btn-outline-secondary m-1" to={{
-                    pathname: `/reservations/${reservation.reservation_id}/edit`,
-                  
-                  }}>Edit</Link>
-                  <button className="btn btn-outline-danger m-1" data-reservation-id-cancel={reservation.reservation_id} onClick={() => onCancel(reservation.reservation_id)}>Cancel</button>
-                </>
-              )}
-            </td>
-          </tr>
-        ))}
+        {reservations
+          .filter((reservation) => reservation.status !== "cancelled")
+          .map((reservation) => (
+            <tr key={reservation.reservation_id}>
+              <td>{reservation.reservation_id}</td>
+              <td>
+                {reservation.first_name}, {reservation.last_name}
+              </td>
+              <td>{reservation.mobile_number}</td>
+              <td>{reservation.reservation_date}</td>
+              <td>{reservation.reservation_time}</td>
+              <td>{reservation.people}</td>
+              <td data-reservation-id-status={reservation.reservation_id}>
+                {reservation.status}
+              </td>
+              <td>
+                {reservation.status === "booked" && (
+                  <>
+                    <Link
+                      className="btn btn-outline-primary m-1"
+                      to={`/reservations/${reservation.reservation_id}/seat`}
+                    >
+                      Seat
+                    </Link>
+                    <Link
+                      className="btn btn-outline-secondary m-1"
+                      to={{
+                        pathname: `/reservations/${reservation.reservation_id}/edit`,
+                      }}
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      className="btn btn-outline-danger m-1"
+                      data-reservation-id-cancel={reservation.reservation_id}
+                      onClick={() => onCancel(reservation.reservation_id)}
+                    >
+                      Cancel
+                    </button>
+                  </>
+                )}
+              </td>
+            </tr>
+          ))}
       </tbody>
     </table>
   ) : (
     <div>No reservations found</div>
   );
 
-  return (
-    <div className="table">
-      {rows}
-    </div>
-  );
+  return <div className="table">{rows}</div>;
 }
 
 export default Reservations;

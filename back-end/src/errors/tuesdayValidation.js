@@ -17,7 +17,6 @@ function tuesdayValidation(req, res, next) {
   }
 
   
-
   if (numeralDay === 2) {
     return next({
       message: `The reservation date is a Tuesday as the restaurant is closed on Tuesdays`,

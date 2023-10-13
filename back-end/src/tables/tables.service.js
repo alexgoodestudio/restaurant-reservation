@@ -49,21 +49,25 @@ function destroy(tableId) {
     .where({ table_id: tableId })
     .del()
 }
-function finish(table) {
-  // console.log("FINISH_SERVICE", table)
-  return knex.transaction(async (transaction) => {
-    await knex('reservations')
-    .where({reservation_id : table.reservation_id})
-    .update({ status: 'finished' })
-    .transacting(transaction)
 
+
+function finish(table) {
+  return knex.transaction(async (transaction) => {
+    // Update the status in the 'tables' table to "free"
     await knex('tables')
-    .where({table_id : table.table_id})
-    .update({ reservation_id: null })
-    .transacting(transaction)
-    .then((data) => data[0])
+      .where({ table_id: table.table_id })
+      .update({ status: 'free' })
+      .transacting(transaction);
+
+    // Update the status in the 'reservations' table to "finished"
+    await knex('reservations')
+      .where({ reservation_id: table.reservation_id })
+      .update({ status: 'finished' })
+      .transacting(transaction);
   });
 }
+
+
 
 
 module.exports = {

@@ -1,24 +1,25 @@
 import { useState } from "react";
 import { finishTableStatus } from "../utils/api";
+import { useHistory } from "react-router-dom";
 
 function Tables({ tables = [] }) {
-  const [isButtonVisible, setIsButtonVisible] = useState(true);
-
+  const [hiddenButtons, setHiddenButtons] = useState({}); // Object to keep track of hidden buttons
+  const history = useHistory();
+  
   async function clickHandler(tableId) {
-    console.log("------!!7",tableId)
     const finish = window.confirm(
       "Is this table ready to seat new guests? This cannot be undone."
     );
     if (finish) {
-      setIsButtonVisible(false);
+      setHiddenButtons({ ...hiddenButtons, [tableId]: true });
       await handleSubmit(tableId);
     }
   }
 
   async function handleSubmit(tableId) {
-    console.log("TABLETABLETABLEID", tableId);
     const abortController = new AbortController();
     await finishTableStatus(tableId, abortController.signal);
+    history.go();
   }
 
   const list = tables.length ? (
@@ -38,7 +39,7 @@ function Tables({ tables = [] }) {
             <td>{table.table_name}</td>
             <td data-table-id-status={table.table_id}>{table.status}</td>
             <td>
-              {table.status === "occupied" && isButtonVisible ? (
+              {table.status === "occupied" && !hiddenButtons[table.table_id] ? (
                 <button
                   onClick={() => clickHandler(table.table_id)}
                   className="btn btn-outline-primary"
