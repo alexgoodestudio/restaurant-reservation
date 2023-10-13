@@ -51,7 +51,7 @@ function Reservations({ setError, reservations = [] }) {
                   <Link className="btn btn-outline-primary m-1" to={`/reservations/${reservation.reservation_id}/seat`}>Seat</Link>
                   <Link className="btn btn-outline-secondary m-1" to={{
                     pathname: `/reservations/${reservation.reservation_id}/edit`,
-                    state: reservation
+                  
                   }}>Edit</Link>
                   <button className="btn btn-outline-danger m-1" data-reservation-id-cancel={reservation.reservation_id} onClick={() => onCancel(reservation.reservation_id)}>Cancel</button>
                 </>

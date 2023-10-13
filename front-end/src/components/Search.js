@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import useQuery from "../utils/useQuery";
-//useQuery is a helper function to obtain search results
 
 function Search() {
   const query = useQuery();
-  // figure out how to use this function to display search results
-
+  const mobile_number = query.get("mobile_number")
+  console.log("Query", mobile_number)
   const [results, setResults] = useState({});
+
+  // const handleSubmit = async(event) =>{
+  //   await searchCall
+  // }
 
   const handleChange = (event) => {
     setResults({
@@ -23,7 +26,7 @@ function Search() {
           className="form-control"
           type="text"
           id="search"
-          placeholder="Search"
+          placeholder="Enter a customer's phone number"
           name="search"
         />
         <button
@@ -31,7 +34,7 @@ function Search() {
           onChange={handleChange}
           className="btn btn-primary mt-2"
         >
-          Save
+          Find
         </button>
         <button className="btn btn-secondary mt-2">Cancel</button>
       </form>

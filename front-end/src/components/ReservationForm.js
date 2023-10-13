@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { updateReservation, createReservation } from "../utils/api";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 
-function ReservationForm({ title, keyValues, isEdit }) {
-  console.log("ISEDIT TOP", isEdit);
+function ReservationForm({ title, formData, setFormData, isEdit }) {
+
   const history = useHistory();
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState(keyValues);
-  const params = useParams();
-  // console.log(formData, "reservations form data");
+  // const [formData, setFormData] = useState(keyValues);
+
   function handleChange(event) {
     if (event.target.name === "people") {
       setFormData({
@@ -26,20 +25,19 @@ function ReservationForm({ title, keyValues, isEdit }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("Prevented default");
     const abortController = new AbortController();
-    console.log("ISEDIT ", isEdit);
+
     try {
       if (!isEdit) {
-        const test = await createReservation(formData, abortController.signal);
-        console.log("TEST", test);
+        await createReservation(formData, abortController.signal);
         history.push(`/dashboard?date=${formData.reservation_date}`);
       } else {
-        const test2 = await updateReservation(
-          params.reservation_id,
+        await updateReservation(
+          formData.reservation_id,
           formData,
           abortController.signal
         );
-        console.log("TEST2", test2);
         history.push(`/dashboard?date=${formData.reservation_date}`);
       }
     } catch (error) {

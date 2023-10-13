@@ -30,7 +30,7 @@ function SeatPage() {
         event.preventDefault();
         const abortController = new AbortController();
         console.log(tableID,"TID")
-        seatReservationStatus(tableID, reservation_id,abortController.signal)
+        await seatReservationStatus(tableID, reservation_id,abortController.signal)
             .then(() => history.push("/dashboard"))
             .catch(setError);
     }

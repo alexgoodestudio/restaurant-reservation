@@ -1,29 +1,25 @@
 import React from "react";
 import ReservationForm from "./ReservationForm";
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { readReservation } from "../utils/api";
+import { useState, useEffect } from "react";
+import { formatAsDate, formatAsTime } from "../utils/date-time";
 
 function EditForm() {
+  const [reservation, setReservation] = useState({});
   const title = "Edit Reservation";
-  const location = useLocation();
-  const reservation = location.state;
+  const { reservation_id } = useParams();
 
-  console.log("12345",reservation.reservation_time);
-
-  const keyValues = {
-    first_name: reservation.first_name,
-    last_name: reservation.last_name,
-    mobile_number: reservation.mobile_number,
-    reservation_date: reservation.reservation_date,
-    reservation_time: reservation.reservation_time,
-    people: reservation.people,
-  };
-
-console.log(typeof keyValues.reservation_date,"DATE",keyValues.reservation_date)
-console.log(typeof reservation.reservation_time,reservation.reservation_time,"TIME")
-console.log(typeof reservation.people,"PEOPLE")
+  useEffect(() => {
+    readReservation(reservation_id).then((data) => setReservation({
+      ...data,
+      reservation_date: formatAsDate(data.reservation_date),
+      reservation_time: formatAsTime(data.reservation_time)
+    }))
+  }, [])
 
   return (
-<ReservationForm title={title} keyValues={keyValues} isEdit={true} reservationId={reservation.reservation_id} />
+    <ReservationForm title={title} formData={reservation} setFormData={setReservation} isEdit={true} reservationId={reservation.reservation_id} />
   );
 }
 
