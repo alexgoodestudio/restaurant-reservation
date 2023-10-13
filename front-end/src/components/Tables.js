@@ -5,6 +5,7 @@ function Tables({ tables = [] }) {
   const [isButtonVisible, setIsButtonVisible] = useState(true);
 
   async function clickHandler(tableId) {
+    console.log("------!!7",tableId)
     const finish = window.confirm(
       "Is this table ready to seat new guests? This cannot be undone."
     );

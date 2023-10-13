@@ -1,19 +1,18 @@
-function pastDate(req,res,next){
+function pastDate(req, res, next) {
+  const today = new Date();
+  const { reservation_date, reservation_time } = req.body.data;
+  
+  const reservationDateTime = new Date(`${reservation_date}T${reservation_time}:00Z`);
 
-const today = new Date();
-const{reservation_date} = req.body.data;
-const reservationDate = new Date(reservation_date)
+  const todayTimeStamp = today.getTime();
+  const reservationDateTimeStamp = reservationDateTime.getTime();
 
-const todayTimeStamp = today.getTime();
-const reservationDateTimeStamp =reservationDate.getTime();
+  console.log("LOOK HERE", todayTimeStamp, reservationDateTimeStamp);
 
-
-    if(todayTimeStamp > reservationDateTimeStamp){
-      // console.log("compared dates in pastDate validator")
-        return res.status(400).send("future")
-    }
-    next()
+  if (todayTimeStamp > reservationDateTimeStamp) {
+    return res.status(400).send({ error: `future` });
+  }
+  next();
 }
 
 module.exports = pastDate;
-

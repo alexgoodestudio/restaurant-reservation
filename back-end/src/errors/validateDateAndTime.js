@@ -1,8 +1,7 @@
 function validateDateAndTime(req, res, next) {
   let hour = res.locals.time.getUTCHours();
   let minute = res.locals.time.getUTCMinutes();
-  console.log("RESLOCALS",res.locals);
-  console.log("HOUR AND MINUTE BEFORE",hour,minute);
+
   
   console.table({
     "(hour < 10)":(hour < 10),
