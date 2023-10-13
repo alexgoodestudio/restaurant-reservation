@@ -43,12 +43,6 @@ function create(data) {
     .returning('*')
     .then((rows) => rows[0]);
 }
-function destroy(tableId) {
-  // console.log(tableId, "qqqqqqqaaaaaaaa")
-  return knex('tables')
-    .where({ table_id: tableId })
-    .del()
-}
 
 
 function finish(table) {
@@ -66,9 +60,6 @@ function finish(table) {
       .transacting(transaction);
   });
 }
-
-
-
 
 module.exports = {
   create,

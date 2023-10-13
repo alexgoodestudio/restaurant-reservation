@@ -1,0 +1,19 @@
+.reservations-container {
+    padding-right: 15px;
+  }
+  
+  .tables-container {
+    padding-left: 15px;
+    margin-top:158px;
+  }
+  
+  @media (max-width: 768px) { /* iPad breakpoint */
+    .reservations-container,
+    .tables-container {
+      padding: 15px;
+    }
+  }
+  /* horizontal-buttons{
+    display: flex;
+    flex-direction:row;
+    gap: 5px; /* Optional: adds some space between buttons} */

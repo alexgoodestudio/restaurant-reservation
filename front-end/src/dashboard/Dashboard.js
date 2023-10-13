@@ -3,43 +3,66 @@ import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import Reservations from "../components/Reservations";
 import Tables from "../components/Tables";
+import './dashboard.css'; 
 
-
-/**
- * Defines the dashboard page.
- * @param date
- *  the date for which the user wants to view reservations.
- * @returns {JSX.Element}
- */
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
+  const [currentDate, setCurrentDate] = useState(new Date().toISOString().split('T')[0]);
 
-  useEffect(loadDashboard, [date]);
+  const handleNextDay = () => {
+    const nextDay = new Date(currentDate);
+    nextDay.setDate(nextDay.getDate() + 1);
+    setCurrentDate(nextDay.toISOString().split('T')[0]);
+  };
+
+  const handlePreviousDay = () => {
+    const previousDay = new Date(currentDate);
+    previousDay.setDate(previousDay.getDate() - 1);
+    setCurrentDate(previousDay.toISOString().split('T')[0]);
+  };
+
+  const handleToday = () => {
+    setCurrentDate(new Date().toISOString().split('T')[0]);
+  };
+
+  useEffect(loadDashboard, [currentDate]);
 
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
-    listReservations({ date }, abortController.signal)
+    listReservations({ date: currentDate }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
     listTables()
-      .then(setTables)
+      .then(setTables);
     return () => abortController.abort();
   }
+
   return (
-    <main>
-      <h1>Reservations</h1>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Today:</h4>
+    <div className="container">
+      <div className="row">
+        <div className="col-sm-9 reservations-container">
+          <h1 className="mb-2">Reservations</h1>
+          <div className="mb-3 font-italic">
+            <h5>Today:</h5>
+          </div>
+          <div className="display-inline">
+            <button className="mt-2 mb-3 btn btn-outline-danger" onClick={handlePreviousDay}>Previous</button>
+            <button className="mt-2 mb-3 ml-1 btn btn-outline-primary" onClick={handleToday}>Today</button>
+            <button className="mt-2 mb-3 ml-1 btn btn-outline-dark" onClick={handleNextDay}>Next</button>
+          </div>
+          <ErrorAlert error={reservationsError} />
+          <div className="col-lg-9 col-md-8 col-sm-12 reservations-container">
+            <Reservations setError={setReservationsError} reservations={reservations} />
+          </div>
+        </div>
+        <div className="col-lg-3 col-md-4 col-sm-12 tables-container">
+          <Tables tables={tables} />
+        </div>
       </div>
-        <ErrorAlert error={reservationsError} className="d-inline" />
-          <div className="d-flex flex-row bd-highlight mb-3">
-        <Reservations setError={setReservationsError} reservations={reservations} className="d-inline w-50" />
-        <Tables tables={tables} />
-      </div>
-    </main>
+    </div>
   );
 }
 

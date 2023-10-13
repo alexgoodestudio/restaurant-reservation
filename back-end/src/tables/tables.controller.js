@@ -22,7 +22,6 @@ const requiredProperties2 = [
 ];
 
 async function finished(req, res, next) {
-    // console.log("FINISHEDDDDD!!!!")
     const data = await service.finish(res.locals.table)
     res.json({
         data

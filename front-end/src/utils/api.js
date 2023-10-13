@@ -181,3 +181,4 @@ export async function readReservation(reservationId, signal) {
   const url = `${API_BASE_URL}/reservations/${reservationId}`;
   return await fetchJson(url, { headers, signal }, {});
 }
+

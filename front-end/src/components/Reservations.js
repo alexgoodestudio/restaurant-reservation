@@ -42,7 +42,7 @@ function Reservations({ setError, reservations = [] }) {
             <tr key={reservation.reservation_id}>
               <td>{reservation.reservation_id}</td>
               <td>
-                {reservation.first_name}, {reservation.last_name}
+              {reservation.last_name}, {reservation.first_name}
               </td>
               <td>{reservation.mobile_number}</td>
               <td>{reservation.reservation_date}</td>
