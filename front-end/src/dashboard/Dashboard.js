@@ -41,7 +41,7 @@ function Dashboard({ date }) {
   }
 
   return (
-    <div className="container">
+    <div className="contain">
       <div className="row">
         <div className="col-sm-9 reservations-container">
           <h1 className="mb-2">Reservations</h1>
@@ -54,11 +54,11 @@ function Dashboard({ date }) {
             <button className="mt-2 mb-3 ml-1 btn btn-outline-dark" onClick={handleNextDay}>Next</button>
           </div>
           <ErrorAlert error={reservationsError} />
-          <div className="col-lg-9 col-md-8 col-sm-12 reservations-container">
+          <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 reservations-container">
             <Reservations setError={setReservationsError} reservations={reservations} />
           </div>
         </div>
-        <div className="col-lg-3 col-md-4 col-sm-12 tables-container">
+        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 tables-container">
           <Tables tables={tables} />
         </div>
       </div>
