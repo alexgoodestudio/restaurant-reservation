@@ -25,7 +25,6 @@ function ReservationForm({ title, formData, setFormData, isEdit }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Prevented default");
     const abortController = new AbortController();
 
     try {

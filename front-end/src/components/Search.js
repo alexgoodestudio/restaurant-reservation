@@ -1,36 +1,20 @@
 import React, { useState } from "react";
-import useQuery from "../utils/useQuery";
 import { listReservations } from "../utils/api";
 
 function Search() {
-  // const query = useQuery();
-  //extract mobile number from query
-  // const mobile_number = query("mobile_number")
-  // console.log("Query", mobile_number)
-  //onClick 
-  //onSubmit function that calls listReservations to return reservation info
-
-  //state variable to save the returned reservations so we can display 
-
   const [mobileNumber, setMobileNumber] = useState("");
-  const [reservations, setReservations] = useState([])
+  const [reservations, setReservations] = useState([]);
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
-    const abortController = new AbortController
-    // make API call
-    // to listReservations and then... 
+    event.preventDefault();
+    const abortController = new AbortController();
     await listReservations({ mobile_number: mobileNumber }, abortController.signal)
-      //we then take the return data which is a list of reservations and set it to the reservation state's value
-      .then((data) => setReservations(data))
-      console.log("DATA",reservations);
-  }
-//NOTE*: check with full valid phone number in url with no special characters
-  const handleChange = (event) => {
-    // save mobileNumber value
-    setMobileNumber(event.target.value)
+      .then((data) => setReservations(data));
   };
-  console.log();
+
+  const handleChange = (event) => {
+    setMobileNumber(event.target.value);
+  };
 
   return (
     <>
@@ -45,24 +29,31 @@ function Search() {
           value={mobileNumber}
           name="search"
         />
-        <button
-          type="submit"
-          className="btn btn-primary mt-2"
-        >
-          Find
-        </button>
+        <button type="submit" className="btn btn-primary mt-2">Find</button>
         <button className="btn btn-secondary mt-2">Cancel</button>
       </form>
-      <div>
-        {reservations.map((reservation, index) => (
-          <div key={index} className="">
-            <p>Reservation ID: {reservation.reservation_id}</p>
-            <p>Name: {reservation.first_name} {reservation.last_name}</p>
-            <p>Mobile Number: {reservation.mobile_number}</p>
-            {/* Add more fields as needed */}
-          </div>
-        ))}
-      </div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Reservation ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Mobile Number</th>
+            {/* Add more headers as needed */}
+          </tr>
+        </thead>
+        <tbody>
+          {reservations.map((reservation, index) => (
+            <tr key={index}>
+              <td>{reservation.reservation_id}</td>
+              <td>{reservation.first_name}</td>
+              <td>{reservation.last_name}</td>
+              <td>{reservation.mobile_number}</td>
+            
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }

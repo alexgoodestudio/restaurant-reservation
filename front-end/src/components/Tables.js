@@ -29,6 +29,7 @@ function Tables({ tables = [] }) {
           <th>Table ID</th>
           <th>Table Name</th>
           <th>Table Status</th>
+          <th>Capacity</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -38,6 +39,7 @@ function Tables({ tables = [] }) {
             <td>{table.table_id}</td>
             <td>{table.table_name}</td>
             <td data-table-id-status={table.table_id}>{table.status}</td>
+            <td>{table.capacity}</td>
             <td>
               {table.status === "occupied" && !hiddenButtons[table.table_id] ? (
                 <button

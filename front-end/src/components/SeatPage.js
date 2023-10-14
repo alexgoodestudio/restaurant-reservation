@@ -7,7 +7,6 @@ function SeatPage() {
     const [tableID, setTableID] = useState("");
     const [error, setError] = useState(null);
     const [tables, setTables] = useState([]);
-    // const [reservation, setReservation] = useState({});
     const { reservation_id } = useParams();
     const history = useHistory();
 

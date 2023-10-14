@@ -20,7 +20,6 @@ function Reservations({ setError, reservations = [] }) {
       }
     }
   };
-
   const rows = reservations.length ? (
     <table className="table">
       <thead>
@@ -62,6 +61,7 @@ function Reservations({ setError, reservations = [] }) {
                     </Link>
                     <Link
                       className="btn btn-outline-secondary m-1"
+                    
                       to={{
                         pathname: `/reservations/${reservation.reservation_id}/edit`,
                       }}
