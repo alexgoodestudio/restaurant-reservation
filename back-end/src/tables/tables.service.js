@@ -38,12 +38,24 @@ function updateReservationStatus(reservationId, newStatus) {
 }
 
 function create(data) {
-  return knex('tables')
-    .insert(data)
-    .returning('*')
-    .then((rows) => rows[0]);
+  if (data.reservation_id) {
+    return knex('tables')
+      .insert(data)
+      .returning('*')
+      .then((rows) => rows[0])
+      .then((table) => {
+      return knex("tables")
+        .where({ table_id: table.table_id })
+        .update({ status: "occupied"}, "*")
+        .then((newRecords) => newRecords[0])
+    })
+  } else {
+    return knex("tables")
+      .insert(data)
+      .returning("*")
+      .then((rows) => rows[0])
+  }
 }
-
 
 function finish(table) {
   return knex.transaction(async (transaction) => {
