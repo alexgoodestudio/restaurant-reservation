@@ -27,7 +27,7 @@ function Search() {
           id="search"
           placeholder="Enter a customer's phone number"
           value={mobileNumber}
-          name="search"
+          name="mobile_number"
         />
         <button type="submit" className="btn btn-primary mt-2">Find</button>
         <button className="btn btn-secondary mt-2">Cancel</button>
@@ -43,7 +43,8 @@ function Search() {
           </tr>
         </thead>
         <tbody>
-          {reservations.map((reservation, index) => (
+          {reservations.length > 0 ? (
+          reservations.map((reservation, index) => (
             <tr key={index}>
               <td>{reservation.reservation_id}</td>
               <td>{reservation.first_name}</td>
@@ -51,7 +52,11 @@ function Search() {
               <td>{reservation.mobile_number}</td>
             
             </tr>
-          ))}
+          ))
+          ):(
+            <p>No reservations found</p>
+          )
+          }
         </tbody>
       </table>
     </>

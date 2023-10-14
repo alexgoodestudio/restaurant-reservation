@@ -41,7 +41,7 @@ function Tables({ tables = [] }) {
             <td data-table-id-status={table.table_id}>{table.status}</td>
             <td>{table.capacity}</td>
             <td>
-              {table.status === "occupied" && !hiddenButtons[table.table_id] ? (
+              {table.reservation_id && !hiddenButtons[table.table_id] ? (
                 <button
                   onClick={() => clickHandler(table.table_id)}
                   className="btn btn-outline-primary"

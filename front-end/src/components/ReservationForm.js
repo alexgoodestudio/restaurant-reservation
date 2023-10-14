@@ -112,7 +112,7 @@ function ReservationForm({ title, formData, setFormData, isEdit }) {
         />
 
         <button type="submit" className="btn btn-primary mt-2">
-          Save
+          Submit
         </button>
         <button className="btn btn-secondary mt-2" onClick={cancelAndReturn}>
           Cancel
