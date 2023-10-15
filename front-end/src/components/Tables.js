@@ -44,7 +44,7 @@ function Tables({ tables = [] }) {
               {table.reservation_id && !hiddenButtons[table.table_id] ? (
                 <button
                   onClick={() => clickHandler(table.table_id)}
-                  className="btn btn-outline-primary"
+                  className="btn btn-outline-primary width"
                   data-table-id-finish={table.table_id}
                 >
                   Finish

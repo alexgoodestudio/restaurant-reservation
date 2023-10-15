@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Raleway:wght@800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Raleway:wght@800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
 
 .contain {
   margin-top: 20px;
@@ -7,20 +8,77 @@
   padding-right: 300px;
 }
 
+.width {
+  width: 80px;
+}
+
+.width2 {
+  width: 90px;
+}
+
+
+.border1 {
+  border: #0015ff 2px;
+  color: rgb(0, 0, 0);
+  /* border-top-right-radius: 48px;
+  border-bottom-left-radius: 48px; */
+  
+}
+
+.h4xl {
+  font-size: 20pt;
+  font-family: "Roboto", sans-serif;
+
+}
+
+.bounce {
+  opacity: 1;
+  font-size: 16pt;
+  position: relative;
+  display: inline-block; /* This ensures the block moves as a unit */
+  animation: bounceFade 1.5s ease-in-out forwards;
+}
+
+@keyframes bounceFade {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  25% {
+    transform: translateY(-5px);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-5px);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.underline {
+  border-bottom: 0.5px solid;
+  padding-bottom: 1px;
+}
+
 .reservations-container {
   padding-left: 0px;
 }
 
-
 h1 {
-  font-family: 'Raleway', sans-serif;
-  font-size: 33pt;
+  font-family: "Raleway", sans-serif;
+  font-size: 37pt;
   margin-bottom: 20px;
 }
 
 @keyframes slideFromLeft {
   0% {
-    transform: translateX(30%);
+    transform: translateX(20%);
   }
   100% {
     transform: translateX(0);
@@ -37,19 +95,13 @@ h1 {
 }
 
 .slide-in {
-  animation: 
-    slideFromLeft 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    fadeIn 4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-h4 {
-  font-family: 'Roboto', sans-serif;
+  animation: slideFromLeft 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    fadeIn 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .tables-container {
   margin-top: 197px;
 }
-
 
 @media (max-width: 768px) {
   .contain {
