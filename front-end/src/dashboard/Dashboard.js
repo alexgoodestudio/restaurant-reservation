@@ -3,7 +3,7 @@ import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import Reservations from "../components/Reservations";
 import Tables from "../components/Tables";
-import './dashboard.css'; 
+import './dashboard.css';
 
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
@@ -40,30 +40,32 @@ function Dashboard({ date }) {
     return () => abortController.abort();
   }
 
-  return (
-    <div className="contain">
-      <div className="row">
-        <div className="col-sm-9 reservations-container">
-          <h1 className="mb-2">Reservations</h1>
-          <div className="mb-3 font-italic">
-            <h5>Today:</h5>
-          </div>
-          <div className="display-inline">
-            <button className="mt-2 mb-3 btn btn-outline-danger" onClick={handlePreviousDay}>Previous</button>
-            <button className="mt-2 mb-3 ml-1 btn btn-outline-primary" onClick={handleToday}>Today</button>
-            <button className="mt-2 mb-3 ml-1 btn btn-outline-dark" onClick={handleNextDay}>Next</button>
-          </div>
-          <ErrorAlert error={reservationsError} />
-          <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 reservations-container">
-            <Reservations setError={setReservationsError} reservations={reservations} />
-          </div>
+return (
+  <div className="contain ">
+    <div className="row">
+      <div className="col-sm-9 reservations-container d-flex flex-column align-items-start">
+        <h1 className="mb-2 slide-in ">Reservations</h1>
+        <div className="mb-3">
+          <h4 className="slide-in ">Today:</h4>  
         </div>
-        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 tables-container">
-          <Tables tables={tables} />
+        <div className="display-inline text-center mb-4 slide-in "> 
+          <button className="mt-2 mb-3 btn btn-outline-danger" onClick={handlePreviousDay}>Previous</button>
+          <button className="mt-2 mb-3 ml-1 btn btn-outline-primary" onClick={handleToday}>Today</button>
+          <button className="mt-2 mb-3 ml-1 btn btn-outline-dark" onClick={handleNextDay}>Next</button>
+        </div>
+        <ErrorAlert error={reservationsError} />
+        <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 slide-in reservations-container">
+          <Reservations setError={setReservationsError} reservations={reservations} />
         </div>
       </div>
+      <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in tables-container d-flex align-items-start">
+        <Tables tables={tables} />
+      </div>
     </div>
-  );
+  </div>
+);
+
+  
 }
 
 export default Dashboard;

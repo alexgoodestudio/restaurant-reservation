@@ -23,7 +23,7 @@ function Tables({ tables = [] }) {
   }
 
   const list = tables.length ? (
-    <table className="table ">
+    <table className="table border">
       <thead>
         <tr>
           <th>Table ID</th>

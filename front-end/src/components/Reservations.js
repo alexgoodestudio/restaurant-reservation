@@ -21,7 +21,7 @@ function Reservations({ setError, reservations = [] }) {
     }
   };
   const rows = reservations.length ? (
-    <table className="table">
+    <table className="table border">
       <thead>
         <tr>
           <th>Reservation ID</th>
@@ -54,13 +54,13 @@ function Reservations({ setError, reservations = [] }) {
                 {reservation.status === "booked" && (
                   <>
                     <Link
-                      className="btn btn-outline-primary m-1"
+                      className="btn btn-outline-primary m-1 "
                       to={`/reservations/${reservation.reservation_id}/seat`}
                     >
                       Seat
                     </Link>
                     <Link
-                      className="btn btn-outline-secondary m-1"
+                      className="btn btn-outline-secondary m-1 "
                     
                       to={{
                         pathname: `/reservations/${reservation.reservation_id}/edit`,
@@ -69,7 +69,7 @@ function Reservations({ setError, reservations = [] }) {
                       Edit
                     </Link>
                     <button
-                      className="btn btn-outline-danger m-1"
+                      className="btn btn-outline-danger m-1 slide-in"
                       data-reservation-id-cancel={reservation.reservation_id}
                       onClick={() => onCancel(reservation.reservation_id)}
                     >
