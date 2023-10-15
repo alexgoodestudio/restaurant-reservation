@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Restaurant Reservation System is a web-based application that allows restaurant owners to manage reservations and tables. It offers both front-end and back-end functionalities, including table assignments, reservation listings, and more. Developed using a PERN stack, it serves as a robust example of a full-stack project.
+The Restaurant Reservation System is an application that allows restaurant owners to manage reservations and tables. It offers both front-end and back-end functionalities, including table assignments, reservation listings, and more. Developed using a PERN stack, it serves as a robust example of a full-stack project.
 
 ## Skills and Techniques Demonstrated
 
@@ -28,7 +28,7 @@ The Restaurant Reservation System is a web-based application that allows restaur
 
 ### DevOps
 - **Version Control:** Managed codebase using Git.
-- **Deployment:** Utilized Heroku for project deployment.
+- **Deployment:** Utilized Render for project deployment.
 - **Fetch API:** Used native Fetch API for server communications.
 
 ## Installation
