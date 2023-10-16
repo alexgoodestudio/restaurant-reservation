@@ -1,52 +1,14 @@
 import React, { useState } from "react";
-import { updateReservation, createReservation } from "../utils/api";
 import { useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 
-function ReservationForm({ title, formData, setFormData, isEdit }) {
+function ReservationForm({ title, error, formData, handleChange,handleSubmit }) {
 
   const history = useHistory();
-  const [error, setError] = useState(null);
-  // const [formData, setFormData] = useState(keyValues);
 
-  function handleChange(event) {
-    if (event.target.name === "people") {
-      setFormData({
-        ...formData,
-        [event.target.name]: Number(event.target.value),
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [event.target.name]: event.target.value,
-      });
-    }
-  }
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const abortController = new AbortController();
-
-    try {
-      if (!isEdit) {
-        await createReservation(formData, abortController.signal);
-        history.push(`/dashboard?date=${formData.reservation_date}`);
-      } else {
-        await updateReservation(
-          formData.reservation_id,
-          formData,
-          abortController.signal
-        );
-        history.push(`/dashboard?date=${formData.reservation_date}`);
-      }
-    } catch (error) {
-      setError(error);
-    }
-  };
   function cancelAndReturn() {
     history.goBack();
   }
-
   //The /reservations/new page will display an error message with className="alert alert-danger"
 
   return (

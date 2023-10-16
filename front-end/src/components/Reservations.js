@@ -14,7 +14,8 @@ function Reservations({ setError, reservations = [] }) {
       try {
         setError(null);
         await cancelReservation(reservation_id, abortController.signal);
-        history.go(0);
+        // history.push(`dashboard?date=`);
+        history.go()
       } catch (error) {
         setError(error);
       }

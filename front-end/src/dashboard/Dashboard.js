@@ -4,12 +4,15 @@ import ErrorAlert from "../layout/ErrorAlert";
 import Reservations from "../components/Reservations";
 import Tables from "../components/Tables";
 import './dashboard.css';
+import useQuery from "../utils/useQuery";
+import { today } from "../utils/date-time";
 
-function Dashboard({ date }) {
+function Dashboard() {
+  const query = useQuery();
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
-  const [currentDate, setCurrentDate] = useState(date);
+  const [currentDate, setCurrentDate] = useState(query.get("date") || today());
 
   const handleNextDay = () => {
     const nextDay = new Date(currentDate);

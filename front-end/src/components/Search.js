@@ -9,7 +9,7 @@ function Search() {
   const history = useHistory();
 
   function cancelAndReturn() {
-    history.goBack();
+    history.go(0);
   }
 
   const handleSubmit = async (event) => {

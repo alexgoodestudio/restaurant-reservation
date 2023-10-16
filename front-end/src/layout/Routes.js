@@ -2,7 +2,6 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
-import { today } from "../utils/date-time";
 import Search from "../components/Search";
 import NewForm from "../components/NewForm";
 import EditForm from "../components/EditForm";
@@ -21,7 +20,7 @@ function Routes() {
         <Redirect to={"/dashboard"} />
       </Route>
       <Route path="/dashboard">
-        <Dashboard date={query.get("date") || today()} />
+        <Dashboard />
       </Route>
       <Route exact path="/reservations/new">
         <NewForm />
