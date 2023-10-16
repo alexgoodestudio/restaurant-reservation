@@ -11,12 +11,23 @@ function EditForm() {
   const { reservation_id } = useParams();
 
   useEffect(() => {
-    readReservation(reservation_id).then((data) => setReservation({
-      ...data,
-      reservation_date: formatAsDate(data.reservation_date),
-      reservation_time: formatAsTime(data.reservation_time)
-    }))
-  }, []) 
+    const fetchData = async () => {
+      try {
+        const data = await readReservation(reservation_id);
+        setReservation({
+          ...data,
+          reservation_date: formatAsDate(data.reservation_date),
+          reservation_time: formatAsTime(data.reservation_time),
+        });
+      } catch (error) {
+        // Handle error as needed, e.g., log it or set an error state
+        console.error("An error occurred:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
 
   return (
     <ReservationForm title={title} formData={reservation} setFormData={setReservation} isEdit={true} reservationId={reservation.reservation_id} />
