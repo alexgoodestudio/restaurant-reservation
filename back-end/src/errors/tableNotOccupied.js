@@ -1,5 +1,3 @@
-const service = require("../tables/tables.service")
-
 async function tableNotOccupied(req, res, next){
     if(res.locals.table !== undefined){
         if( res.locals.table.status !== "occupied"){
