@@ -89,7 +89,7 @@ async function updateReservationStatus(req, res) {
 }
 
 module.exports = {
-  list: asyncErrorBoundary(list),
+  list: [asyncErrorBoundary(list)],
   create: [
     asyncErrorBoundary(hasProperties([...requiredProperties])),
     tuesdayValidation,
