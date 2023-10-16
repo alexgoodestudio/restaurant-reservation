@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { listReservations } from "../utils/api";
+import { useHistory } from "react-router-dom";
+
 
 function Search() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [reservations, setReservations] = useState([]);
+  const history = useHistory();
+
+  function cancelAndReturn() {
+    history.goBack();
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,7 +37,7 @@ function Search() {
           name="mobile_number"
         />
         <button type="submit" className="btn btn-primary mt-2">Find</button>
-        <button className="btn btn-secondary mt-2">Cancel</button>
+        <button onClick={cancelAndReturn}  className="btn btn-secondary mt-2">Cancel</button>
       </form>
       <table className="table">
         <thead>
