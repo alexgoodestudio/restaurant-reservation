@@ -1,6 +1,5 @@
 # Restaurant Reservation System
 ![Home Page](./images/Screenshot%202023-10-16%20at%2012.39.49%20PM.png)
-![Search Page](./images/Screenshot%202023-10-16%20at%2012.43.31%20PM.png)
 
 ## Overview
 [Check it out here!](https://restaurant-reservation-frontend-bste.onrender.com)
