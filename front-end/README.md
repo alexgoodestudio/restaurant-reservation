@@ -1,10 +1,6 @@
 # Restaurant Reservation System
-![Home Page](./images/Screenshot%202023-10-16%20at%2012.39.49%20PM.png)
-
 
 ## Overview
-[Check it out here!](https://restaurant-reservation-frontend-bste.onrender.com)
-
 The Restaurant Reservation System is an application that allows restaurant owners to manage reservations and tables. It offers both front-end and back-end functionalities, including table assignments, reservation listings, and more. Developed using a PERN stack, it serves as a robust example of a full-stack project.
 
 ## Skills and Techniques Demonstrated

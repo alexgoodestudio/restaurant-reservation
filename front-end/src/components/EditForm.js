@@ -16,7 +16,7 @@ function EditForm() {
       reservation_date: formatAsDate(data.reservation_date),
       reservation_time: formatAsTime(data.reservation_time)
     }))
-  }, []) 
+  }, [])
 
   return (
     <ReservationForm title={title} formData={reservation} setFormData={setReservation} isEdit={true} reservationId={reservation.reservation_id} />
