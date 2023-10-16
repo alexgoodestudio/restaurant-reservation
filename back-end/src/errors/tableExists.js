@@ -3,9 +3,7 @@ const service = require("../tables/tables.service");
 async function tableExists(req, res, next) {
     const { table_id } = req.params;
     const table = await service.read(Number(table_id));
-    // if(table === undefined){
-    //     console.log("ping")
-    // }
+
     if(table !== undefined) {
         res.locals.table = table;
         next()

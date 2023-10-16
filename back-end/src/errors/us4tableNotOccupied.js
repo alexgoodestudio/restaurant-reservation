@@ -5,7 +5,7 @@ async function us4tableNotOccupied(req, res, next){
     const data = await service.read(table_id)
 
     if(data.status !== "free"){
-        next({
+       return next({
             message: "occupied",
             status: 400,
         });

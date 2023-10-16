@@ -7,8 +7,6 @@ function pastDate(req, res, next) {
   const todayTimeStamp = today.getTime();
   const reservationDateTimeStamp = reservationDateTime.getTime();
 
-  console.log("LOOK HERE", todayTimeStamp, reservationDateTimeStamp);
-
   if (todayTimeStamp > reservationDateTimeStamp) {
     return res.status(400).send({ error: `future` });
   }

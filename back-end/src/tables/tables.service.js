@@ -32,7 +32,6 @@ function updateReservationStatus(reservationId, newStatus) {
     .where({ reservation_id: reservationId })
     .update({ status: newStatus })
     .catch((error) => {
-      // console.error(`Error updating reservation status: ${error.message}`);
       throw error;
     });
 }

@@ -2,14 +2,6 @@ function validateDateAndTime(req, res, next) {
   let hour = res.locals.time.getUTCHours();
   let minute = res.locals.time.getUTCMinutes();
 
-  
-  console.table({
-    "(hour < 10)":(hour < 10),
-    "(hour === 10 && minute < 30)":(hour === 10 && minute < 30),
-    "(hour > 21)":(hour > 21),
-    "(hour === 21 && minute > 30)":(hour === 21 && minute > 30),
-    "(hour < 10) ||(hour === 10 && minute < 30) ||(hour > 21) ||(hour === 21 && minute > 30)":(hour < 10) ||(hour === 10 && minute < 30) ||(hour > 21) ||(hour === 21 && minute > 30),
-  })
   if (
     (hour < 10) ||
     (hour === 10 && minute < 30) ||
@@ -21,7 +13,6 @@ function validateDateAndTime(req, res, next) {
       status: 400,
     });
   }
-  console.log("HOUR AND MINUTE AFTER@@@@",hour,minute);
   next();
 }
 

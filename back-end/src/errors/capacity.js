@@ -1,5 +1,4 @@
 function capacity(req, res, next) {
-    // console.log("capacity");
     const { capacity } = req.body.data;
     if (!capacity || !Number.isInteger(capacity)) {
    

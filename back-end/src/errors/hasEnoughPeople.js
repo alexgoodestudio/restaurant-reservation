@@ -2,7 +2,7 @@ function hasEnoughPeople(req, res, next) {
   
     let { people } = req.body.data;
     if (typeof people !== "number" || people < 1) {
-        next({
+        return next({
             message: "people has to be a number above zero",
             status: 400,
         });

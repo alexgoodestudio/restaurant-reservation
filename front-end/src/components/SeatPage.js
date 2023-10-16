@@ -28,7 +28,6 @@ function SeatPage() {
     async function submitHandler(event) {
         event.preventDefault();
         const abortController = new AbortController();
-        console.log(tableID,"TID")
         await seatReservationStatus(tableID, reservation_id,abortController.signal)
             .then(() => history.push("/dashboard"))
             .catch(setError);
