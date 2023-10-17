@@ -14,6 +14,11 @@ function Dashboard() {
   const [tables, setTables] = useState([]);
   const [currentDate, setCurrentDate] = useState(query.get("date") || today());
 
+  const dateObj = new Date(currentDate);
+  const dayIndex = dateObj.getDay();
+  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const dayOfWeek = daysOfWeek[dayIndex];
+
   const handleNextDay = () => {
     const nextDay = new Date(currentDate);
     nextDay.setDate(nextDay.getDate() + 1);
@@ -48,7 +53,7 @@ return (
     <div className="row">
       <div className="col-sm-9 reservations-container d-flex flex-column align-items-start">
         <h1 className="mb-2 slide-in border1 mt-3 mb-3"> Reservations 
-         <span className="slide-in h4xl"><br/> <span className="underline bounce font-italic">{currentDate}</span></span> 
+         <span className="slide-in h4xl"><br/> <span className=" bounce font-italic mb-1"> on {dayOfWeek}<h3 className="ml-5" > {currentDate} </h3></span></span> 
          </h1>
         <div className="mb-3">
         </div>
