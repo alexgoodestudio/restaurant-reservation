@@ -9,7 +9,7 @@ const reservationExists = require("../errors/reservationExists");
 const reservationExists2 = require("../errors/reservationExists2");
 const hasProperties2 = require("../errors/hasProperties2");
 const reservationFinished = require("../errors/reservationFinished");
-// const hasReservationID = require("../errors/hasReservationID");
+const hasReservationID2 = require("../errors/hasReservationID2");
 const reservationStatusErrors = require("../errors/reservationStatusErrors");
 const booked = require("../errors/booked");
 const cancelReservation = require("../errors/cancelReservation");
@@ -120,7 +120,7 @@ module.exports = {
   ],
 
   read: [
-    // asyncErrorBoundary(hasReservationID),
+    asyncErrorBoundary(hasReservationID2),
     asyncErrorBoundary(reservationExists),
     asyncErrorBoundary(read),
   ],

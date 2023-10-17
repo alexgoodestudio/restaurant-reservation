@@ -5,7 +5,7 @@ const length = require("../errors/length");
 const tableExists = require("../errors/tableExists");
 const capacity = require("../errors/capacity");
 const dataExists = require("../errors/dataExists")
-// const hasReservationID = require("../errors/hasReservationID");
+const hasReservationID2 = require("../errors/hasReservationID2");
 const tableNotOccupied = require("../errors/tableNotOccupied");
 const reservationExist = require("../errors/reservationExists");
 const sufficientSeating = require("../errors/sufficientSeating");
@@ -83,7 +83,7 @@ module.exports = {
     update: [
         notFound2,
         asyncErrorBoundary(hasProperties([...requiredProperties2])),
-        // asyncErrorBoundary(hasReservationID),
+        asyncErrorBoundary(hasReservationID2),
         asyncErrorBoundary(reservationExist),
         asyncErrorBoundary(alreadySeated),
         asyncErrorBoundary(sufficientSeating),
