@@ -1,4 +1,5 @@
 function validateDateAndTime(req, res, next) {
+  // console.log("validatedateand time");
   let hour = res.locals.time.getUTCHours();
   let minute = res.locals.time.getUTCMinutes();
 

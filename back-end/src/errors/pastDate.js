@@ -1,4 +1,5 @@
 function pastDate(req, res, next) {
+  // console.log("pastDate");
   const today = new Date();
   const { reservation_date, reservation_time } = req.body.data;
   

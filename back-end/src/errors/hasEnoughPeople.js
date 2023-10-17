@@ -1,4 +1,5 @@
 function hasEnoughPeople(req, res, next) {
+    // console.log("hasEnoughPeople");
   
     let { people } = req.body.data;
     if (typeof people !== "number" || people < 1) {

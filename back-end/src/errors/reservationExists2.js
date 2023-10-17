@@ -1,6 +1,7 @@
 const service = require("../reservations/reservations.service");
 
 async function reservationExists2(req, res, next) {
+    // console.log("reservationExists2");
     const reservationId = req.params.reservation_id
     const reservation = await service.read(reservationId);
     if(!reservation){

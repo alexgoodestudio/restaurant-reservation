@@ -1,4 +1,5 @@
 function tuesdayValidation(req, res, next) {
+  // console.log("tuesdayVal");
   const { reservation_date, reservation_time } = req.body.data;
 
   const reservationDate = new Date(`${reservation_date}T${reservation_time}:00Z`);

@@ -35,6 +35,7 @@ async function read(req, res) {
 }
 
 async function update(req, res) {
+  // console.log("update");
   const { reservation_id } = req.params;
   const body = await service.read(reservation_id);
   const {
@@ -92,25 +93,25 @@ async function updateReservationStatus(req, res) {
 module.exports = {
   list: [asyncErrorBoundary(list)],
   create: [
-    asyncErrorBoundary(notNumber),
-    asyncErrorBoundary(hasProperties([...requiredProperties])),
+    hasProperties([...requiredProperties]),
     tuesdayValidation,
     hasEnoughPeople,
     pastDate,
     booked,
     reservationStatusErrors,
     validateDateAndTime,
+    notNumber,
     asyncErrorBoundary(create),
   ],
 
   update: [
     hasProperties([...requiredProperties]),
-    notNumber,
     asyncErrorBoundary(reservationExists2),
     tuesdayValidation,
     hasEnoughPeople,
     pastDate,
     validateDateAndTime,
+    notNumber,
     asyncErrorBoundary(update),
   ],
 
