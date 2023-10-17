@@ -47,8 +47,8 @@ return (
   <div className="contain ">
     <div className="row">
       <div className="col-sm-9 reservations-container d-flex flex-column align-items-start">
-        <h1 className="mb-2 slide-in border1 mt-3 mb-3"> Reservations: 
-        {/* <span className="slide-in h4xl"> Today: <span className="underline bounce font-italic">{date}</span></span>  */}
+        <h1 className="mb-2 slide-in border1 mt-3 mb-3"> Reservations 
+         <span className="slide-in h4xl"><br/> <span className="underline bounce font-italic">{currentDate}</span></span> 
          </h1>
         <div className="mb-3">
         </div>

@@ -13,6 +13,7 @@ const hasReservationID2 = require("../errors/hasReservationID2");
 const reservationStatusErrors = require("../errors/reservationStatusErrors");
 const booked = require("../errors/booked");
 const cancelReservation = require("../errors/cancelReservation");
+const notNumber = require("../errors/notNumber");
 
 const requiredProperties = [
   "first_name",
@@ -91,6 +92,7 @@ async function updateReservationStatus(req, res) {
 module.exports = {
   list: [asyncErrorBoundary(list)],
   create: [
+    asyncErrorBoundary(notNumber),
     asyncErrorBoundary(hasProperties([...requiredProperties])),
     tuesdayValidation,
     hasEnoughPeople,
@@ -103,6 +105,7 @@ module.exports = {
 
   update: [
     hasProperties([...requiredProperties]),
+    notNumber,
     asyncErrorBoundary(reservationExists2),
     tuesdayValidation,
     hasEnoughPeople,

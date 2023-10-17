@@ -58,6 +58,7 @@ function EditForm() {
     } catch (error) {
       setError(error);
     }
+    return () => abortController.abort();
   };
 
   return (
