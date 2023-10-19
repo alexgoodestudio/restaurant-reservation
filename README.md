@@ -1,5 +1,5 @@
 # Restaurant Reservation System
-![Home Page](./images/Screenshot%202023-10-16%20at%2012.39.49%20PM.png)
+![Home Page](./front-end/images/Screenshot%202023-10-17%20at%2012.28.14%20PM.png)
 
 ## Overview
 
