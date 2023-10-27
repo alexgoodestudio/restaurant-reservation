@@ -15,7 +15,7 @@ function Dashboard() {
   const [currentDate, setCurrentDate] = useState(query.get("date") || today());
 
   const dateObj = new Date(currentDate);
-  const dayIndex = dateObj.getDay();
+  const dayIndex = dateObj.getDay() +1;
   const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const dayOfWeek = daysOfWeek[dayIndex];
 
