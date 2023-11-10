@@ -3,27 +3,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
 
 .contain {
-  margin-top: 20px;
+
   padding-left: 90px;
   padding-right: 300px;
+}
+h1{
+  font-size: 60px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .width {
   width: 80px;
+}
+.tables{
+  margin-top: 83px;
 }
 
 .width2 {
   width: 90px;
 }
 
-
 .border1 {
   border: #0015ff 2px;
   color: rgb(0, 0, 0);
-  /* border-top-right-radius: 48px;
-  border-bottom-left-radius: 48px; */
   
 }
+ .pic{
+  width: 300px;
+  margin: 0px;
+ }
 
 .h4xl {
   font-size: 20pt;
@@ -36,7 +45,6 @@ h4{
 
 .bounce {
   opacity: 1;
-  font-size: 16pt;
   position: relative;
   display: inline-block; /* This ensures the block moves as a unit */
   animation: bounceFade 1.5s ease-in-out forwards;
@@ -69,15 +77,8 @@ h4{
   padding-bottom: 1px;
 }
 
-.reservations-container {
-  padding-left: 0px;
-}
 
-h1 {
-  font-family: "Raleway", sans-serif;
-  font-size: 37pt;
-  margin-bottom: 20px;
-}
+
 
 @keyframes slideFromLeft {
   0% {
@@ -102,20 +103,20 @@ h1 {
     fadeIn 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.tables-container {
-  margin-top: 197px;
+
+
+.contain {
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 992px) {
   .contain {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 90px;
+    padding-right: 300px;
   }
 
-  .tables-container {
-    margin-top: 20px;
-    padding: 10px;
-  }
+
 
   .btn {
     padding: 5px 10px;
