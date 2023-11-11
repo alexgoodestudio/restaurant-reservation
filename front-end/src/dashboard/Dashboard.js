@@ -57,8 +57,8 @@ function Dashboard() {
   }
 
   return (
-    <div className="m-3">
-      <div>
+    <div >
+      <div className="m-3">
       <h1>Reservations.com</h1>
       <span className="slide-in bounced d-flex h4xl"> on {dayOfWeek}: <span className="underline"> {currentDate}</span>{" "}</span>
       <img src={image1} className="pic mt-2 slide-in mb-2" alt="squiggle " />
@@ -93,6 +93,7 @@ function Dashboard() {
   <Reservations
     setError={setReservationsError}
     reservations={reservations}
+    
   />
 </div>
 

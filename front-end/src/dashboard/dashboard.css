@@ -136,6 +136,9 @@ h4{
     font-size: 40px; /* Smaller font size for h1 on small screens */
   }
 
+  .mediawidth{
+    width: 50%;
+  }
   .btn {
     padding: 3px 6px; /* Smaller padding for buttons */
     font-size: 0.8rem; /* Smaller font size for buttons */
@@ -143,3 +146,4 @@ h4{
 
   
 }
+
