@@ -31,13 +31,12 @@ h1{
 }
  .pic{
   width: 300px;
-  margin: 0px;
+  margin: -20px;
  }
 
 .h4xl {
   font-size: 20pt;
   font-family: "Roboto", sans-serif;
-
 }
 h4{
   font-family: "Raleway", sans-serif;
@@ -110,21 +109,37 @@ h4{
   padding-right: 5%;
 }
 
+@media (min-width: 576px) {
+  .contain {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+}
+
 @media (min-width: 992px) {
   .contain {
     padding-left: 90px;
     padding-right: 300px;
   }
+}
 
+/* Additional styles for table responsiveness */
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
 
+/* Adjust font size and padding for smaller screens */
+@media (max-width: 576px) {
+  h1 {
+    font-size: 40px; /* Smaller font size for h1 on small screens */
+  }
 
   .btn {
-    padding: 5px 10px;
-    margin-right: 5px;
+    padding: 3px 6px; /* Smaller padding for buttons */
+    font-size: 0.8rem; /* Smaller font size for buttons */
   }
 
-  .display-inline {
-    flex-direction: column;
-    align-items: center;
-  }
+  
 }

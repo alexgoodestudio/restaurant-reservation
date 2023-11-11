@@ -21,7 +21,7 @@ function Reservations({ setError, reservations = [] }) {
     }
   };
   const rows = reservations.length ? (
-    <table className="table border">
+    <table className="table border ">
       <thead>
         <tr>
           <th>Reservation ID</th>
@@ -86,7 +86,7 @@ function Reservations({ setError, reservations = [] }) {
     <div>No reservations found</div>
   );
 
-  return <div className="table">{rows}</div>;
+  return <div className="table ">{rows}</div>;
 }
 
 export default Reservations;

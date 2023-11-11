@@ -6,8 +6,7 @@ import Tables from "../components/Tables";
 import "./dashboard.css";
 import useQuery from "../utils/useQuery";
 import { today } from "../utils/date-time";
-import image1 from "../images/s2.png"
-
+import image1 from "../images/s2.png";
 
 function Dashboard() {
   const query = useQuery();
@@ -57,17 +56,16 @@ function Dashboard() {
     return () => abortController.abort();
   }
 
-
   return (
-    <div >
+    <div className="m-3">
+      <div>
       <h1>Reservations.com</h1>
-      <img src={image1} className="pic" alt="Descriptive Alt Text" />
-
-
-          <span className="slide-in bounce h4xl">{" "} on {dayOfWeek}:{" "} <span className="underline"> {currentDate}</span> </span>
+      <span className="slide-in bounced d-flex h4xl"> on {dayOfWeek}: <span className="underline"> {currentDate}</span>{" "}</span>
+      <img src={image1} className="pic mt-2 slide-in mb-2" alt="squiggle " />
+      </div>
+      <br />
       <div className="row contain">
         <div className="col-sm-9  ">
-
           <div className="display-inline mt-3  slide-in mb-3">
             <button
               className="  mb-3 btn btn-outline-danger width2"
@@ -88,16 +86,16 @@ function Dashboard() {
               Next
             </button>
           </div>
-    
 
+          <div className="">
+            <ErrorAlert error={reservationsError} />
+            <div className="table-responsive">
+  <Reservations
+    setError={setReservationsError}
+    reservations={reservations}
+  />
+</div>
 
-
-          <ErrorAlert error={reservationsError} />
-          <div className="col-xl-10 col-lg-12 col-md-12 col-sm-12 slide-in ">
-            <Reservations
-              setError={setReservationsError}
-              reservations={reservations}
-            />
           </div>
         </div>
         <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in d-flex align-items-start tables">
