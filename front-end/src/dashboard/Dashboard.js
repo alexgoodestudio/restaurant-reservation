@@ -16,15 +16,15 @@ function Dashboard() {
   const [currentDate, setCurrentDate] = useState(query.get("date") || today());
 
   const dateObj = new Date(currentDate);
-  const dayIndex = dateObj.getDay() + 1;
+  const dayIndex = dateObj.getDay();
   const daysOfWeek = [
-    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
+    "Sunday",
   ];
   const dayOfWeek = daysOfWeek[dayIndex];
 
@@ -57,15 +57,20 @@ function Dashboard() {
   }
 
   return (
-    <div >
-      <div className="m-3">
-      <h1>Reservations.com</h1>
-      <span className="slide-in bounced d-flex h4xl"> on {dayOfWeek}: <span className="underline"> {currentDate}</span>{" "}</span>
-      <img src={image1} className="pic mt-2 slide-in mb-2" alt="squiggle " />
+    <div>
+      <div className="ml-4 mt-3 ">
+        <h1 className="ml-5 mb-4 p-3 d-flex  ">
+          Welcome, Let's Get Started
+        </h1>
       </div>
-      <br />
+
       <div className="row contain">
         <div className="col-sm-9  ">
+          <p className=" ml-2 ">
+            {" "}
+            Reservations for: {dayOfWeek},{" "}
+            <span className="ml-1 underline"> {currentDate}</span>{" "}
+          </p>
           <div className="display-inline mt-3  slide-in mb-3">
             <button
               className="  mb-3 btn btn-outline-danger width2"
@@ -90,13 +95,11 @@ function Dashboard() {
           <div className="">
             <ErrorAlert error={reservationsError} />
             <div className="table-responsive">
-  <Reservations
-    setError={setReservationsError}
-    reservations={reservations}
-    
-  />
-</div>
-
+              <Reservations
+                setError={setReservationsError}
+                reservations={reservations}
+              />
+            </div>
           </div>
         </div>
         <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in d-flex align-items-start tables">

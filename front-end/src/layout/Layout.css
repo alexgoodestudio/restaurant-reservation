@@ -1,8 +1,15 @@
 .side-bar {
-  background-color: #0015ff;
+  background-color: #4b3dbb;
   min-width: 200px;
 }
 
 .logo{
   border: #ffffff;
+}
+
+.bor{
+  border-style:dashed ;
+  padding: 6px;
+  margin-top: 10px;
+  border-width: 1px;
 }
