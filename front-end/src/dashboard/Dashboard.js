@@ -58,11 +58,12 @@ function Dashboard() {
 
   return (
     <div>
-      <div className="ml-4 mt-3 ">
-        <h1 className="ml-5 mb-4 p-3 d-flex  ">
-          Welcome, Let's Get Started
+      <div className="ml-4  ">
+        <h1 className="ml-5 mt-3 p-1 d-flex  ">
+          Welcome, Let's Get Started.
         </h1>
-      </div>
+        <img src={image1} className="pic mb-4 slide-in" alt="squiggle " />     
+         </div>
 
       <div className="row contain">
         <div className="col-sm-9  ">
