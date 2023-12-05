@@ -40,7 +40,9 @@ margin-top: -12px;
   margin-left: 12px;
   margin-right: 12px;
 }
-
+.width4{
+  width: 100px;
+}
 .reduce {
   height: 100px;
 }
@@ -142,7 +144,7 @@ p {
   overflow-x: auto;
 }
 
-@media (max-width: 976px) {
+@media (max-width: 1050px) {
   .contain {
     padding-left: 10%;
     padding-right: 10%;
@@ -180,7 +182,7 @@ p {
   }
 
   .italics2{
-    margin-left: 0px;
+    margin-left: 70px;
   }
 
 }

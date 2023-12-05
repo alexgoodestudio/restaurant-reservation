@@ -21,7 +21,7 @@ function Menu() {
             <span>Reservation.com</span>
           </div>
         </Link>
-        <hr className="sidebar-divider my-0" />
+        <hr className=" my-0" />
         <ul className="nav navbar-nav ">
           <li className="nav-item ">
             <Link className="  nav-link textGreen" to="/dashboard">
@@ -31,7 +31,7 @@ function Menu() {
           </li>
           <li className="nav-item ">
             <Link className="  nav-link textGreen" to="/search">
-              <span className="oi oi-magnifying-glass " />
+              <span className="oi oi-magnifying-glass "/>
               &nbsp;Search
             </Link>
           </li>

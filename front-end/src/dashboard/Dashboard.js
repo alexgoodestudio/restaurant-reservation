@@ -8,6 +8,7 @@ import useQuery from "../utils/useQuery";
 import { today } from "../utils/date-time";
 import image1 from "../images/1.png";
 import line1 from "../images/yellow.png";
+import arrow from "../images/arrow.png";
 
 function Dashboard() {
   const query = useQuery();
@@ -63,14 +64,18 @@ function Dashboard() {
       <div className="marginLeft">
         <div className="greyBor">
           <div className="display mt-3">
-            <h1 className=" ">
+            <h1>
               <span className="italics1">Seamless </span> Reservations,
             </h1>
+
+            <img src={arrow} className="width4"/>
+
             <h1 className="">
               <span className="italics2"> Exceptional</span> Service.
             </h1>
           </div>
-          <img src={line1} className="width3" />
+
+          {/* <img src={line1} className="width3" /> */}
           <p className="p-0 mt-2 pb-3">
             Designed with the needs of restaurant staff in mind, we equip your
             team with the tools to manage reservations, and table allocations with
@@ -89,7 +94,7 @@ function Dashboard() {
               </h4>
               <div className="display-inline  ml-4 slide-in">
                 <button
-                  className="   btn btn-outline-danger width2"
+                  className=" btn btn-outline-danger width2"
                   onClick={handlePreviousDay}
                 >
                   Previous
@@ -121,11 +126,12 @@ function Dashboard() {
               <Reservations
                 setError={setReservationsError}
                 reservations={reservations}
+             
               />
             </div>
           </div>
         </div>
-        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in ">
+        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in tables">
           <Tables tables={tables} />
         </div>
       </div>
