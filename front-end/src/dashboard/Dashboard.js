@@ -59,7 +59,7 @@ function Dashboard() {
   return (
     <div>
       <img src={image1} className="fullScreen " alt="banner" />
-     <div className="ml-5">
+     <div className="marginLeft">
 
           <h1 className="mt-3 d-flex ">
             <span className="italics1">Seamless </span> Reservations,

@@ -9,18 +9,18 @@ h1 {
   width: 80px;
 }
 
-.italics1{
-font-style: italic;
-margin-right: 12px;
+.italics1 {
+  font-style: italic;
+  margin-right: 12px;
 }
-.italics2{
+.italics2 {
   font-style: italic;
   margin-left: 12px;
   margin-right: 12px;
-  }
+}
 
-.marginLeft{
-  margin-left: 50px;
+.marginLeft {
+  margin-left: 30px;
 }
 
 .width2 {
@@ -33,15 +33,14 @@ margin-right: 12px;
 }
 .fullScreen {
   box-sizing: content-box;
-width: 108%;
-margin-left: -15px;
+  width: 108%;
+  margin-left: -15px;
   min-width: 100%;
 }
 
 p {
   font-family: "Poppins", sans-serif;
 }
-
 
 .bounce {
   opacity: 1;
@@ -110,7 +109,7 @@ p {
 
 @media (min-width: 992px) {
   .contain {
-    padding-left: 50px;
+    padding-left: 30px;
     padding-right: 300px;
   }
 }
@@ -121,12 +120,10 @@ p {
   overflow-x: auto;
 }
 
-
 @media (max-width: 576px) {
   h1 {
-    font-size: 15px;
+    font-size: 13px;
     min-width: 380px;
-    
   }
 
   .mediawidth {
@@ -137,3 +134,4 @@ p {
     font-size: 0.8rem;
   }
 }
+
