@@ -6,7 +6,7 @@ import Tables from "../components/Tables";
 import "./dashboard.css";
 import useQuery from "../utils/useQuery";
 import { today } from "../utils/date-time";
-import image1 from "../images/s2.png";
+import image1 from "../images/1.png";
 
 function Dashboard() {
   const query = useQuery();
@@ -58,42 +58,52 @@ function Dashboard() {
 
   return (
     <div>
-      <div className="ml-4  ">
-        <h1 className="ml-5 mt-3 p-1 d-flex  ">
-          Welcome, Let's Get Started.
-        </h1>
-        <img src={image1} className="pic mb-4 slide-in" alt="squiggle " />     
-         </div>
+      <img src={image1} className="fullScreen " alt="banner" />
+     <div className="ml-5">
 
-      <div className="row contain">
-        <div className="col-sm-9  ">
-          <p className=" ml-2 ">
-            {" "}
-            Reservations for: {dayOfWeek},{" "}
-            <span className="ml-1 underline"> {currentDate}</span>{" "}
-          </p>
-          <div className="display-inline mt-3  slide-in mb-3">
-            <button
-              className="  mb-3 btn btn-outline-danger width2"
-              onClick={handlePreviousDay}
-            >
-              Previous
-            </button>
-            <button
-              className="  ml-1 mb-3 btn btn-outline-primary width"
-              onClick={handleToday}
-            >
-              Today
-            </button>
-            <button
-              className="  ml-1 mb-3 btn btn-outline-dark width "
-              onClick={handleNextDay}
-            >
-              Next
-            </button>
-          </div>
+          <h1 className="mt-3 d-flex ">
+            <span className="italics1">Seamless </span> Reservations,
+            <span className="italics2"> Exceptional</span> Service.
+          </h1>
 
-          <div className="">
+      <p className="p-0 mt-2 mb-5">
+        Designed with the needs of restaurant staff in mind, we equip your team
+        with the tools to manage reservations, and table allocations with
+        unparalleled ease.
+      </p>
+      
+        <div className=" mt-5">
+        <p className=" mr-5">
+          {" "}
+          Reservations for: {dayOfWeek},{" "}
+          <span className="ml-1 underline"> {currentDate}</span>{" "}
+        </p>
+
+        <div className="display-inline mb-3  slide-in ">
+          <button
+            className="   btn btn-outline-danger width2"
+            onClick={handlePreviousDay}
+          >
+            Previous
+          </button>
+          <button
+            className="ml-1  btn btn-outline-primary width"
+            onClick={handleToday}
+          >
+            Today
+          </button>
+          <button
+            className="ml-1  btn btn-outline-dark width"
+            onClick={handleNextDay}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+      </div>
+      <div className="row contain ">
+        <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9 ">
+          <div>
             <ErrorAlert error={reservationsError} />
             <div className="table-responsive">
               <Reservations
@@ -103,7 +113,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in d-flex align-items-start tables">
+        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in ">
           <Tables tables={tables} />
         </div>
       </div>

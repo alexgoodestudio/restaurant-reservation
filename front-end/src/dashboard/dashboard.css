@@ -1,18 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
 
-
-h1{
-  font-size: 50px;
-  margin: 0px;
-  padding: 0px;
-  color: #4b3dbb;
-  
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 25pt;
 }
+
 .width {
   width: 80px;
 }
-.tables{
-  margin-top: 83px;
-  
+
+.italics1{
+font-style: italic;
+margin-right: 12px;
+}
+.italics2{
+  font-style: italic;
+  margin-left: 12px;
+  margin-right: 12px;
+  }
+
+.marginLeft{
+  margin-left: 50px;
 }
 
 .width2 {
@@ -20,26 +28,26 @@ h1{
 }
 
 .border1 {
-  border: #0015ff 2px;
+  border: #056937 2px;
   color: rgb(0, 0, 0);
-  
-  
 }
- .pic{
-  width: 260px;
-  margin-left: 30px;
- }
+.fullScreen {
+  box-sizing: content-box;
+width: 108%;
+margin-left: -15px;
+  min-width: 100%;
+}
 
-.h4xl {
-  font-size: 20pt;
-font-family: Arial, Helvetica, sans-serif;  
+p {
+  font-family: "Poppins", sans-serif;
 }
+
 
 .bounce {
   opacity: 1;
   position: relative;
   display: inline-block; /* This ensures the block moves as a unit */
-  animation: bounceFade 1.5s ease-in-out forwards;
+  animation: bounceFade 2.5s ease-in-out forwards;
 }
 
 @keyframes bounceFade {
@@ -64,13 +72,6 @@ font-family: Arial, Helvetica, sans-serif;
     opacity: 1;
   }
 }
-.underline {
-  border-bottom: 0.5px solid;
-  padding-bottom: 1px;
-}
-
-
-
 
 @keyframes slideFromLeft {
   0% {
@@ -95,8 +96,6 @@ font-family: Arial, Helvetica, sans-serif;
     fadeIn 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-
-
 .contain {
   padding-left: 5%;
   padding-right: 5%;
@@ -111,33 +110,30 @@ font-family: Arial, Helvetica, sans-serif;
 
 @media (min-width: 992px) {
   .contain {
-    padding-left: 90px;
+    padding-left: 50px;
     padding-right: 300px;
   }
 }
 
-/* Additional styles for table responsiveness */
 .table-responsive {
   display: block;
   width: 100%;
   overflow-x: auto;
 }
 
-/* Adjust font size and padding for smaller screens */
+
 @media (max-width: 576px) {
   h1 {
-    font-size: 40px; /* Smaller font size for h1 on small screens */
+    font-size: 15px;
+    min-width: 380px;
     
   }
 
-  .mediawidth{
+  .mediawidth {
     width: 50%;
   }
   .btn {
-    padding: 3px 6px; /* Smaller padding for buttons */
-    font-size: 0.8rem; /* Smaller font size for buttons */
+    padding: 3px 6px;
+    font-size: 0.8rem;
   }
-
-  
 }
-
