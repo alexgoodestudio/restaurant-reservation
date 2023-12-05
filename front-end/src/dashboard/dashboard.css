@@ -126,18 +126,14 @@ p {
   padding-right: 5%;
 }
 
-@media (min-width: 576px) {
-  .contain {
-    padding-left: 10%;
-    padding-right: 10%;
-  }
-}
+
 
 @media (min-width: 992px) {
   .contain {
     padding-left: 30px;
     padding-right: 300px;
   }
+  
 }
 
 .table-responsive {
@@ -146,7 +142,11 @@ p {
   overflow-x: auto;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 976px) {
+  .contain {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
   h1 {
     font-size: 18px;
     min-width: 380px;
