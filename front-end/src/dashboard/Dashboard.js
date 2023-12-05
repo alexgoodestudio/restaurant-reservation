@@ -68,7 +68,7 @@ function Dashboard() {
               <span className="italics1">Seamless </span> Reservations,
             </h1>
 
-            <img src={arrow} className="width4"/>
+            <img src={arrow} className="ml-3 mr-2 mb-2 width4"/>
 
             <h1 className="">
               <span className="italics2"> Exceptional</span> Service.
