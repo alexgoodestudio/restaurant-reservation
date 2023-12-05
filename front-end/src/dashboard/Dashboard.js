@@ -7,6 +7,7 @@ import "./dashboard.css";
 import useQuery from "../utils/useQuery";
 import { today } from "../utils/date-time";
 import image1 from "../images/1.png";
+import line1 from "../images/yellow.png";
 
 function Dashboard() {
   const query = useQuery();
@@ -59,47 +60,58 @@ function Dashboard() {
   return (
     <div>
       <img src={image1} className="fullScreen " alt="banner" />
-     <div className="marginLeft">
-
-          <h1 className="mt-3 d-flex ">
-            <span className="italics1">Seamless </span> Reservations,
-            <span className="italics2"> Exceptional</span> Service.
-          </h1>
-
-      <p className="p-0 mt-2 mb-5">
-        Designed with the needs of restaurant staff in mind, we equip your team
-        with the tools to manage reservations, and table allocations with
-        unparalleled ease.
-      </p>
-      
-        <div className=" mt-5">
-        <p className=" mr-5">
-          {" "}
-          Reservations for: {dayOfWeek},{" "}
-          <span className="ml-1 underline"> {currentDate}</span>{" "}
-        </p>
-
-        <div className="display-inline mb-3  slide-in ">
-          <button
-            className="   btn btn-outline-danger width2"
-            onClick={handlePreviousDay}
-          >
-            Previous
-          </button>
-          <button
-            className="ml-1  btn btn-outline-primary width"
-            onClick={handleToday}
-          >
-            Today
-          </button>
-          <button
-            className="ml-1  btn btn-outline-dark width"
-            onClick={handleNextDay}
-          >
-            Next
-          </button>
+      <div className="marginLeft">
+        <div className="greyBor">
+          <div className="display mt-3">
+            <h1 className=" ">
+              <span className="italics1">Seamless </span> Reservations,
+            </h1>
+            <h1 className="">
+              <span className="italics2"> Exceptional</span> Service.
+            </h1>
+          </div>
+          <img src={line1} className="width3" />
+          <p className="p-0 mt-2 pb-3">
+            Designed with the needs of restaurant staff in mind, we equip your
+            team with the tools to manage reservations, and table allocations with
+            unparalleled ease.
+          </p>
         </div>
-      </div>
+        <div className=" row  mb-1">
+          <div className="col-6 d-flex p-2 pt-4">
+            {/* <img src={line1} className="reduce" alt="banner" /> */}
+            <div>
+              <h6 className="text-dark ml-4">Reservations for:</h6>
+              <h4 className="text-dark paddingNegative ">
+                {" "}
+                {dayOfWeek},{" "}
+                <span className="ml-1 underline"> {currentDate}</span>{" "}
+              </h4>
+              <div className="display-inline  ml-4 slide-in">
+                <button
+                  className="   btn btn-outline-danger width2"
+                  onClick={handlePreviousDay}
+                >
+                  Previous
+                </button>
+                <button
+                  className="ml-1  btn btn-outline-primary width"
+                  onClick={handleToday}
+                >
+                  Today
+                </button>
+                <button
+                  className="ml-1  btn btn-outline-dark width"
+                  onClick={handleNextDay}
+                >
+                  Next
+                </button>
+              </div>
+
+              <br />
+            </div>
+          </div>
+        </div>
       </div>
       <div className="row contain ">
         <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9 ">

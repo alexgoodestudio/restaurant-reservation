@@ -5,8 +5,30 @@ h1 {
   font-size: 25pt;
 }
 
+h4{
+  font-family: "Poppins", sans-serif;
+}
+
 .width {
   width: 80px;
+}
+
+.paddingNegative {
+  padding-right: 10px;
+  padding-left: 25px;
+}
+
+.greyBor {
+  box-shadow: 10px 5px 5px gray;
+}
+.width3{
+width: 14%;
+margin-left: 188px;
+margin-top: -12px;
+}
+
+.display{
+  display: flex;
 }
 
 .italics1 {
@@ -17,6 +39,10 @@ h1 {
   font-style: italic;
   margin-left: 12px;
   margin-right: 12px;
+}
+
+.reduce {
+  height: 100px;
 }
 
 .marginLeft {
@@ -33,9 +59,9 @@ h1 {
 }
 .fullScreen {
   box-sizing: content-box;
-  width: 108%;
+  width: 102%;
   margin-left: -15px;
-  min-width: 100%;
+  min-width: 108%;
 }
 
 p {
@@ -122,8 +148,13 @@ p {
 
 @media (max-width: 576px) {
   h1 {
-    font-size: 13px;
+    font-size: 18px;
     min-width: 380px;
+  }
+
+  h4{
+    font-size: 15pt;
+    
   }
 
   .mediawidth {
@@ -133,5 +164,23 @@ p {
     padding: 3px 6px;
     font-size: 0.8rem;
   }
-}
 
+  .width3 {
+    position: absolute;
+    top: 308px; left: -130px;
+    width: 100px;
+    padding: 100px;
+  }
+  .display{
+    display: block;
+  }
+
+  .display-inline{
+    display: flex;
+  }
+
+  .italics2{
+    margin-left: 0px;
+  }
+
+}
