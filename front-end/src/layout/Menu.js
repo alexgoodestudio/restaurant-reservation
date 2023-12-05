@@ -24,8 +24,8 @@ function Menu() {
         <hr className=" my-0" />
         <ul className="nav navbar-nav ">
           <li className="nav-item ">
-            <Link className="  nav-link textGreen" to="/dashboard">
-              <span className="oi oi-dashboard " />
+            <Link className=" d-flex nav-link textGreen" to="/dashboard">
+              <span className="mt-1 oi oi-dashboard" />
               &nbsp;Dashboard
             </Link>
           </li>
