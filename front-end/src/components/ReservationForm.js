@@ -8,7 +8,6 @@ function ReservationForm({ title, error, formData, handleChange,handleSubmit }) 
   function cancelAndReturn() {
     history.goBack();
   }
-  //The /reservations/new page will display an error message with className="alert alert-danger"
 
   return (
     <div>

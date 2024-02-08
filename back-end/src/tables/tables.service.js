@@ -65,21 +65,7 @@ function finish(table) {
         .update({status: "finished"});
     });
   }
-// function finish(table) {
-//   return knex.transaction(async (transaction) => {
-//     // Update the status in the 'tables' table to "free"
-//     await knex('tables')
-//       .where({ table_id: table.table_id })
-//       .update({ status: 'free' })
-//       .transacting(transaction);
 
-//     // Update the status in the 'reservations' table to "finished"
-//     await knex('reservations')
-//       .where({ reservation_id: table.reservation_id })
-//       .update({ status: 'finished' })
-//       .transacting(transaction);
-//   });
-// }
 
 module.exports = {
   create,

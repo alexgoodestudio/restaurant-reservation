@@ -35,7 +35,6 @@ function NewForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const abortController = new AbortController();
-
     try {
       
         await createReservation(formData, abortController.signal);
@@ -46,7 +45,7 @@ function NewForm() {
   };
 
   return (
-    <ReservationForm title={title} error={error} keyValues={keyValues} formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
+    <ReservationForm title={title} error={error} formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
   );
 }
 

@@ -61,8 +61,6 @@ async function update(req, res) {
     res.status(200).json({ data: updatedData });
 }
 
-
-
 module.exports = {
     create: [
         asyncErrorBoundary(dataExists),

@@ -37,7 +37,7 @@ async function read(req, res) {
 async function update(req, res) {
   // console.log("update");
   const { reservation_id } = req.params;
-  const body = await service.read(reservation_id);
+  const existingData = await service.read(reservation_id);
   const {
     status,
     first_name,
@@ -47,8 +47,9 @@ async function update(req, res) {
     reservation_date,
     reservation_time,
   } = req.body.data;
+
   const updatedData = {
-    ...body,
+    ...existingData,
     status,
     first_name,
     last_name,
