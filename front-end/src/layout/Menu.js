@@ -18,7 +18,7 @@ function Menu() {
           to="/"
         >
           <div className="sidebar-brand-text textGreen mt-3 borderOne mx-3 ">
-            <span>Reservation.com</span>
+            <span>ServiceSync</span>
           </div>
         </Link>
         <hr className=" my-0" />

@@ -59,7 +59,7 @@ function Dashboard() {
 
   return (
     <div>
-      <img src={image1} className="fullScreen" alt="banner" />
+      <img src={image1} className="img-fluid width6" alt="banner" />
       <div className="marginLeft">
         <div className="greyBor">
           <div className="display mt-3">
@@ -109,7 +109,6 @@ function Dashboard() {
                   Next
                 </button>
               </div>
-
               <br />
             </div>
           </div>
@@ -119,10 +118,11 @@ function Dashboard() {
         <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9 ">
           <div>
             <ErrorAlert error={reservationsError} />
-            <div className="table-responsive">
+            <div className="table-responsive ">
               <Reservations
                 setError={setReservationsError}
                 reservations={reservations}
+                
               />
             </div>
           </div>
