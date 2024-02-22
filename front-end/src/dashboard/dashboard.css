@@ -127,8 +127,8 @@ p {
     display: block;
     width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Allows for a smoother scrolling experience on touch devices */
-    overflow-x: scroll; /* Ensures that the table is scrollable on smaller screens */
+    -webkit-overflow-scrolling: touch; 
+    overflow-x: scroll; 
   }
 }
 
@@ -137,9 +137,7 @@ p {
     padding-left: 30px;
     padding-right: 300px;
   }
-  
 }
-
 
 @media (max-width: 1050px) {
   .contain {

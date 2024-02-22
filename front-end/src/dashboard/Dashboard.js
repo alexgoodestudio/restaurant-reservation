@@ -127,9 +127,13 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in tables table-responsive">
-          <Tables tables={tables} />
+
+        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in ">
+      
+          <Tables tables={tables}/>
+   
         </div>
+
       </div>
     </div>
   );

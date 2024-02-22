@@ -5,12 +5,12 @@ import NotFound from "./NotFound";
 import Search from "../components/Search";
 import NewForm from "../components/NewForm";
 import EditForm from "../components/EditForm";
-import useQuery from "../utils/useQuery";
+
 import TableForm from "../components/TableForm";
 import SeatPage from "../components/SeatPage";
 
 function Routes() {
-  const query = useQuery();
+
   return (
     <Switch>
       <Route exact path="/">
