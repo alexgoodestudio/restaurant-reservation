@@ -163,7 +163,7 @@ export async function finishTableStatus(table_id, signal) {
     signal,
   };
   return await fetchJson(url, options, {});
-}8
+}
 
 export async function updateReservation(reservation_id, formData, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation_id}`;

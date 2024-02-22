@@ -7,7 +7,6 @@ import "./dashboard.css";
 import useQuery from "../utils/useQuery";
 import { today } from "../utils/date-time";
 import image1 from "../images/1.png";
-import line1 from "../images/yellow.png";
 import arrow from "../images/arrow.png";
 
 function Dashboard() {
@@ -60,7 +59,7 @@ function Dashboard() {
 
   return (
     <div>
-      <img src={image1} className="fullScreen " alt="banner" />
+      <img src={image1} className="fullScreen" alt="banner" />
       <div className="marginLeft">
         <div className="greyBor">
           <div className="display mt-3">
@@ -68,23 +67,21 @@ function Dashboard() {
               <span className="italics1">Seamless </span> Reservations,
             </h1>
 
-            <img src={arrow} className="ml-3 mr-2 mb-2 width4"/>
+            <img src={arrow} className="ml-3 mr-2 mb-2 width4" alt="arrow" />
 
             <h1 className="">
               <span className="italics2"> Exceptional</span> Service.
             </h1>
           </div>
 
-          {/* <img src={line1} className="width3" /> */}
           <p className="p-0 mt-2 pb-3">
             Designed with the needs of restaurant staff in mind, we equip your
-            team with the tools to manage reservations, and table allocations with
-            unparalleled ease.
+            team with the tools to manage reservations, and table allocations
+            with unparalleled ease.
           </p>
         </div>
         <div className=" row  mb-1">
           <div className="col-6 d-flex p-2 pt-4">
-            {/* <img src={line1} className="reduce" alt="banner" /> */}
             <div>
               <h6 className="text-dark ml-4">Reservations for:</h6>
               <h4 className="text-dark paddingNegative ">
@@ -126,12 +123,11 @@ function Dashboard() {
               <Reservations
                 setError={setReservationsError}
                 reservations={reservations}
-             
               />
             </div>
           </div>
         </div>
-        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in tables">
+        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in tables table-responsive">
           <Tables tables={tables} />
         </div>
       </div>
