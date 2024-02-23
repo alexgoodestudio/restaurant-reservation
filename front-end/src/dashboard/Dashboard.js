@@ -115,7 +115,8 @@ function Dashboard() {
         </div>
       </div>
       <div className="row contain ">
-        <div className="col-sm-12 col-md-12 col-lg-9 col-xl-9 ">
+
+        <div className="col-sm-12 col-md-12 col-lg-7 col-xl-7 ">
           <div>
             <ErrorAlert error={reservationsError} />
             <div className="table-responsive ">
@@ -127,13 +128,11 @@ function Dashboard() {
             </div>
           </div>
         </div>
-
-        <div className="col-xl-2 col-lg-12 col-md-12 col-sm-12 slide-in ">
-      
+     
+        <div className=" col-xl-4 col-lg-4 col-md-12 col-sm-12 slide-in table-responsive">
           <Tables tables={tables}/>
-   
         </div>
-
+        <div className="col-lg-1"></div>
       </div>
     </div>
   );

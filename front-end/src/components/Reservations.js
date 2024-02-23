@@ -53,14 +53,15 @@ function Reservations({ setError, reservations = [] }) {
               <td>
                 {reservation.status === "booked" && (
                   <>
+                 
                     <Link
-                      className="btn btn-outline-primary m-1 width"
+                      className="btn btn-outline-primary width d-flex"
                       to={`/reservations/${reservation.reservation_id}/seat`}
                     >
                       Seat
                     </Link>
                     <Link
-                      className="btn btn-outline-secondary m-1 width"
+                      className="btn btn-outline-secondary width d-flex"
                     
                       to={{
                         pathname: `/reservations/${reservation.reservation_id}/edit`,
@@ -68,13 +69,15 @@ function Reservations({ setError, reservations = [] }) {
                     >
                       Edit
                     </Link>
+                   
                     <button
-                      className="btn btn-outline-danger m-1 width slide-in"
+                      className="btn btn-outline-danger width slide-in d-flex"
                       data-reservation-id-cancel={reservation.reservation_id}
                       onClick={() => onCancel(reservation.reservation_id)}
                     >
                       Cancel
                     </button>
+                    
                   </>
                 )}
               </td>
